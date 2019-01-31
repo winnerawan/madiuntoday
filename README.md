@@ -1,6 +1,6 @@
 ## MADIUNTODAY ANDROID APP
 
-<img src="https://cdn.rawgit.com/steverichey/google-play-badge-svg/master/img/id_get.svg" width="20%">
+[<img src="https://cdn.rawgit.com/steverichey/google-play-badge-svg/master/img/id_get.svg" width="20%">](https://play.google.com/store/apps/details?id=net.winnerawan.madiun)
 
 [![COPYRIGHT](https://img.shields.io/badge/LICENSE%20-MIT-green.svg)](./license.md) <br />
 Unless covered under some other license, all content in this repository is shared under an MIT license. See [license.md](./license.md) for details.<br/>
