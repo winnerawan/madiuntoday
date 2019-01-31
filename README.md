@@ -1,0 +1,8 @@
+## MADIUNTODAY ANDROID APP
+#### LICENSE
+> [![COPYRIGHT](https://img.shields.io/badge/%C2%A9%202019,%20WINNERAWAN%20T-ALL%20RIGHTS%20RESERVED-green.svg)](mailto:winnerawan@gmail.com) <br />
+**UNAUTHORIZED COPYING OF THIS FILE**, VIA ANY MEDIUM IS STRICTLY PROHIBITED<br />
+PROPRIETARY AND CONFIDENTIAL<br />
+WRITTEN BY WINNERAWAN T <winnerawan@gmail.com>, January 2019<br />
+ 
+[]()
