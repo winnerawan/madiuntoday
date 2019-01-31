@@ -1,8 +1,8 @@
 ## MADIUNTODAY ANDROID APP
-#### LICENSE
-> [![COPYRIGHT](https://img.shields.io/badge/%C2%A9%202019,%20WINNERAWAN%20T-ALL%20RIGHTS%20RESERVED-green.svg)](mailto:winnerawan@gmail.com) <br />
-**UNAUTHORIZED COPYING OF THIS FILE**, VIA ANY MEDIUM IS STRICTLY PROHIBITED<br />
-PROPRIETARY AND CONFIDENTIAL<br />
-WRITTEN BY WINNERAWAN T <winnerawan@gmail.com>, January 2019<br />
- 
+
+<img src="https://cdn.rawgit.com/steverichey/google-play-badge-svg/master/img/id_get.svg" width="20%">
+
+[![COPYRIGHT](https://img.shields.io/badge/LICENSE%20-MIT-green.svg)](mailto:winnerawan@gmail.com) <br />
+Unless covered under some other license, all content in this repository is shared under an MIT license. See [license.md](./license.md) for details.<br/>
+Madiuntoday and the madiuntoday logo are site (mark or brand, whatevs) of madiuntoday.id under Dinas Komunikasi dan Informatika Kota Madiun and they have all the copyrights and trademarks and whatevs.
 []()
