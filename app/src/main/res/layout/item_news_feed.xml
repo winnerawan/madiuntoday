@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    android:background="@color/white"
+    android:foreground="?attr/selectableItemBackground"
+    android:padding="@dimen/cardview_content_padding">
+
+    <TextView
+        android:id="@+id/news_domain_source_tv"
+        style="@style/TextStyle.Title.Sub"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_below="@+id/news_picture_iv"
+        android:layout_marginRight="@dimen/cardview_content_padding"
+        android:text="Bola.net"
+        android:textColor="@color/textSub" />
+
+    <LinearLayout
+        android:id="@+id/news_comment_count_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/dimen_comment_newsfeed"
+        android:layout_toLeftOf="@+id/news_close_iv"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginRight="@dimen/cardview_content_padding"
+            android:adjustViewBounds="true"
+            app:srcCompat="@drawable/ic_message_grey_500_24dp" />
+
+        <TextView
+            android:id="@+id/news_comment_count_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/news_close_iv"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginBottom="@dimen/activity_margin_horizontal"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/ic_close_grey_500_24dp" />
+
+    <TextView
+        android:id="@+id/news_title_tv"
+        style="@style/TextStyle.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/news_close_iv"
+        android:layout_toLeftOf="@id/news_picture_iv"
+        android:layout_toStartOf="@id/news_picture_iv"
+        android:ellipsize="end"
+        android:lines="2"
+        android:maxLines="2"
+        android:text="Place your title here"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/news_picture_iv"
+        android:layout_width="108dp"
+        android:layout_height="82dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/news_close_iv"
+        android:layout_marginLeft="@dimen/activity_margin_horizontal"
+        android:layout_marginStart="@dimen/activity_margin_horizontal"
+        android:adjustViewBounds="true"
+        android:background="@color/black_effective"
+        android:scaleType="centerInside"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>

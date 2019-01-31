@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_16dp">16dp</dimen>
+    <dimen name="nol_dp">0dp</dimen>
+    <dimen name="width_24dp">24dp</dimen>
+    <dimen name="height_24dp">24dp</dimen>
+    <dimen name="width_32dp">32dp</dimen>
+    <dimen name="height_32dp">32dp</dimen>
+    <dimen name="padding_10dp">10dp</dimen>
+    <dimen name="padding_8dp">8dp</dimen>
+    <dimen name="padding_4dp">4dp</dimen>
+    <dimen name="height_img_content">160dp</dimen>
+    <dimen name="cardview_content_padding">8dp</dimen>
+    <dimen name="activity_margin_horizontal">16dp</dimen>
+    <dimen name="dimen_comment_newsfeed">56dp</dimen>
+
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="wrap_content"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:attrs="http://schemas.android.com/tools">
+    <LinearLayout android:orientation="vertical" android:layout_width="match_parent" android:layout_height="wrap_content">
+        <net.winnerawan.madiun.ui.helper.SquareViewPager
+                android:id="@+id/viewpager_images"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <com.rd.PageIndicatorView
+                android:layout_marginTop="@dimen/padding_8dp"
+                android:layout_gravity="center"
+                android:id="@+id/pageIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                app:piv_animationType="scale"
+                app:piv_dynamicCount="true"
+                app:piv_interactiveAnimation="true"
+                app:piv_selectedColor="#00A2E8"
+                app:piv_unselectedColor="@color/grey_500"
+                app:piv_viewPager="@id/viewpager_images"
+                attrs:piv_padding="2dp"
+                attrs:piv_radius="2dp" />
+        <LinearLayout android:layout_margin="@dimen/padding_8dp" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal">
+            <TextView android:id="@+id/author" android:textColor="@color/black" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <com.codesgood.views.JustifiedTextView android:id="@+id/description" android:textColor="@color/black_effective" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             android:layout_width="match_parent"
+                                             android:background="@color/white_blue"
+                                             android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:orientation="vertical" android:background="@color/white_blue"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <!--top-section-->
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:elevation="0dp"
+                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize">
+
+            <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                          android:layout_height="wrap_content">
+                <ImageView android:src="@drawable/mtdlogo" android:layout_width="86dp"
+                           android:layout_height="wrap_content"/>
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <!--fragment-->
+        <FrameLayout
+            android:id="@+id/main_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_above="@+id/navigation">
+        </FrameLayout>
+
+        <!--bottom navigation-->
+        <View android:layout_above="@id/navigation" android:id="@+id/shadow" android:background="@drawable/shadow_above" android:layout_width="match_parent" android:layout_height="1dp"/>
+
+        <android.support.design.widget.BottomNavigationView
+                android:id="@+id/navigation"
+                app:itemBackground="@color/white"
+                app:itemIconTint="@drawable/statelist"
+                app:itemTextColor="@drawable/statelist"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                app:layout_anchorGravity="bottom"
+                app:menu="@menu/nav"
+                android:layout_height="wrap_content">
+
+        </android.support.design.widget.BottomNavigationView>
+
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

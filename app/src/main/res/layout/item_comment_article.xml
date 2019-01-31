@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_marginBottom="2dp"
+    android:padding="@dimen/cardview_content_padding">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_avatar_iv"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="@dimen/cardview_content_padding"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/user_name_tv"
+        style="@style/TextStyle.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/user_avatar_iv"
+        android:layout_toRightOf="@+id/user_avatar_iv"
+        android:text="Agus Haryono"
+        android:textColor="@color/textSub"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/user_date_tv"
+        style="@style/TextStyle.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_name_tv"
+        android:layout_toEndOf="@+id/user_avatar_iv"
+        android:layout_toRightOf="@+id/user_avatar_iv"
+        android:text="2017-11-22"
+        android:textColor="@color/textSub"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:id="@+id/like_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_margin="@dimen/cardview_content_padding"
+            android:tint="@color/grey_700"
+            app:srcCompat="@drawable/ic_thumb_up_black_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/user_comment_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_date_tv"
+        android:layout_marginTop="@dimen/cardview_content_padding"
+        android:layout_toEndOf="@+id/user_avatar_iv"
+        android:layout_toRightOf="@+id/user_avatar_iv"
+        android:text="Bangsat kau"
+        android:textSize="16sp" />
+
+</RelativeLayout>
