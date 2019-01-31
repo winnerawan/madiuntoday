@@ -21,5 +21,9 @@
         <activity android:name="net.winnerawan.madiun.ui.main.MainActivity"/>
         <activity android:name="net.winnerawan.madiun.ui.detail.DetailActivity"/>
         <activity android:name=".ui.webview.WebviewActivity"/>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="bff4848b3ed3df68b8971fa1cb1fab790ba7cccc" />
     </application>
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>
