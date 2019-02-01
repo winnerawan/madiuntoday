@@ -3,11 +3,6 @@ package net.winnerawan.madiun.data.network.model;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by adriyo on 11/17/17.
- * adriyo.github.io
- */
-
 public class Categories  implements Serializable {
 
     private List<Category> categories;

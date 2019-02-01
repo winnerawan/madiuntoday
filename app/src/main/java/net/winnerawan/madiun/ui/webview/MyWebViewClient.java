@@ -14,11 +14,6 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Created by adriyo on 6/3/2017.
- * adriyo.github,io
- */
-
 public class MyWebViewClient extends WebViewClient {
 
     private String sourceUrl;

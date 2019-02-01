@@ -5,11 +5,6 @@ import net.winnerawan.madiun.ui.base.MvpView;
 
 import java.util.List;
 
-/**
- * Created by adriyo on 11/15/17.
- * adriyo.github.io
- */
-
 public interface ContentNewsView extends MvpView {
 //    void displayArticles(List<Article> articles);
 

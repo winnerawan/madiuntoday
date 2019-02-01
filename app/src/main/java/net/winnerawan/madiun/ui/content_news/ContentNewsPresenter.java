@@ -14,11 +14,6 @@ import net.winnerawan.madiun.data.network.model.Post;
 import net.winnerawan.madiun.ui.base.BasePresenter;
 import net.winnerawan.madiun.utils.rx.SchedulerProvider;
 
-/**
- * Created by adriyo on 11/15/17.
- * adriyo.github.io
- */
-
 public class ContentNewsPresenter<V extends ContentNewsView> extends BasePresenter<V>
         implements ContentNewsMvpPresenter<V> {
 
