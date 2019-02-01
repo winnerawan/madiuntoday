@@ -1,6 +1,7 @@
 package net.winnerawan.madiun.data.network;
 
 
+import android.text.TextUtils;
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 import io.reactivex.Single;
 import net.winnerawan.madiun.data.network.model.Article;
@@ -9,7 +10,9 @@ import net.winnerawan.madiun.data.network.model.Gallery;
 import net.winnerawan.madiun.data.network.model.Post;
 import net.winnerawan.madiun.data.network.response.GalleryResponse;
 import net.winnerawan.madiun.data.network.response.YoutubeResponse;
+import net.winnerawan.madiun.utils.AppConstants;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -41,7 +44,15 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<List<Category>> getCategories() {
+        List<Integer> excludes = new ArrayList<>();
+        excludes.add(AppConstants.CATEGORY_DBH_CHT);
+        excludes.add(AppConstants.CATEGORY_FOTO_BERITA);
+        excludes.add(AppConstants.CATEGORY_MADIUN_THIS_WEEK);
+        excludes.add(AppConstants.CATEGORY_TV);
+
+        String excludeCategory = android.text.TextUtils.join(",", excludes);
         return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_CATGORIES)
+                .addQueryParameter("exclude", excludeCategory)
                 .build()
                 .getObjectListSingle(Category.class);
     }

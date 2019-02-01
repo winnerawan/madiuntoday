@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 
 import java.util.List;
 
-public class TvFragment extends BaseFragment implements TvView {
+public class TvFragment extends BaseFragment implements TvView, VideosAdapter.Callback {
 
     @Inject
     TvMvpPresenter<TvView> presenter;
@@ -64,6 +64,7 @@ public class TvFragment extends BaseFragment implements TvView {
 
     @Override
     protected void setUp(View view) {
+        adapter.setCallback(this);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
         presenter.getVideos();
     }
@@ -72,6 +73,11 @@ public class TvFragment extends BaseFragment implements TvView {
     public void showVideos(List<YoutubeItem> videos) {
         adapter.addItems(videos);
         mRecyclerView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onYoutubeItemSelected(YoutubeItem video) {
+
     }
 
     @Override
