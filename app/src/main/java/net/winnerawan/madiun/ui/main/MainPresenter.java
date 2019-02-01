@@ -1,6 +1,7 @@
 package net.winnerawan.madiun.ui.main;
 
 import net.winnerawan.madiun.data.DataManager;
+import net.winnerawan.madiun.utils.AppLogger;
 import net.winnerawan.madiun.utils.rx.SchedulerProvider;
 import net.winnerawan.madiun.ui.base.BasePresenter;
 import io.reactivex.disposables.CompositeDisposable;
@@ -18,5 +19,11 @@ public class MainPresenter<V extends MainView> extends BasePresenter<V> implemen
     @Override
     public String getIntersId() {
         return getDataManager().getInters();
+    }
+
+    @Override
+    public boolean isAdsEnable() {
+        AppLogger.e("ADS: "+getDataManager().isAdEnable());
+        return getDataManager().isAdEnable();
     }
 }

@@ -8,6 +8,17 @@
                  android:roundIcon="@mipmap/ic_launcher_round"
                  android:supportsRtl="true"
                  android:theme="@style/AppTheme">
+        <service android:name=".notification.HelbFirebaseInstanceIDService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:name=".notification.HelbMessagingService"
+                 android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="@string/google_maps_key"/>
@@ -47,6 +58,7 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="bff4848b3ed3df68b8971fa1cb1fab790ba7cccc" />
+        <service android:name=".service.SyncService"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

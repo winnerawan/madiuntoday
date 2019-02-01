@@ -49,7 +49,18 @@ public class ContentNewsPresenter<V extends ContentNewsView> extends BasePresent
                     }
                 }));
     }
-//    @Override
+
+    @Override
+    public String getInters() {
+        return getDataManager().getInters();
+    }
+
+    @Override
+    public String getBanner() {
+        return getDataManager().getBanner();
+    }
+
+    //    @Override
 //    public void loadNews(Category category) {
 //        getMvpView().setEnableRefreshLayout();
 //        getCompositeDisposable().add(getDataManager()

@@ -69,6 +69,7 @@ public class MainActivity extends BaseActivity implements MainView, BottomNaviga
         mNavigation.setOnNavigationItemSelectedListener(this);
         ViewUtils.setStatusBar(this);
         setUpToolbar();
+        presenter.isAdsEnable();
 //        mInterstitialAd = new InterstitialAd(getApplicationContext());
 //        mInterstitialAd.setAdUnitId(presenter.getIntersId());
 //        mInterstitialAd.loadAd(adRequest);

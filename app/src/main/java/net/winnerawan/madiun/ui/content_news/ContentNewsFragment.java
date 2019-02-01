@@ -19,6 +19,9 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import net.winnerawan.madiun.R;
 import net.winnerawan.madiun.data.network.model.Category;
 import net.winnerawan.madiun.data.network.model.Post;
@@ -47,8 +50,10 @@ public class ContentNewsFragment extends BaseFragment implements ContentNewsView
     ShimmerFrameLayout mShimmer;
     private Category category;
     private List<Post> posts = new ArrayList<>();
-
+    private InterstitialAd mInterstitialAd;
     private int index = 1;
+    @Inject
+    AdRequest adRequest;
     public ContentNewsFragment() {
         // Required empty public constructor
     }
@@ -92,6 +97,10 @@ public class ContentNewsFragment extends BaseFragment implements ContentNewsView
     @Override
     protected void setUp(View view) {
         adapter.setCallback(this);
+        mInterstitialAd = new InterstitialAd(getBaseActivity());
+        mInterstitialAd.setAdUnitId(presenter.getInters());
+        mInterstitialAd.loadAd(adRequest);
+
         Bundle bundle = getArguments();
         if (bundle == null) {
             return;
@@ -125,7 +134,34 @@ public class ContentNewsFragment extends BaseFragment implements ContentNewsView
         intent.putExtra("post", post);
         intent.putExtra("url", post.getLink());
         intent.putExtra("image", post.getJetpackFeaturedMediaUrl());
+        intent.putExtra("ads_enable", false);
         startActivity(intent);
+    }
+
+    @Override
+    public void onPostSelectedWithAds(Post post) {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+            mInterstitialAd.setAdListener(new AdListener() {
+                @Override
+                public void onAdClosed() {
+                    mInterstitialAd.loadAd(adRequest);
+                    Intent intent = new Intent(getBaseActivity(), DetailActivity.class);
+                    intent.putExtra("post", post);
+                    intent.putExtra("url", post.getLink());
+                    intent.putExtra("image", post.getJetpackFeaturedMediaUrl());
+                    intent.putExtra("ads_enable", true);
+                    startActivity(intent);
+                    super.onAdClosed();
+                }
+            });
+        } else {
+            Intent intent = new Intent(getBaseActivity(), DetailActivity.class);
+            intent.putExtra("post", post);
+            intent.putExtra("url", post.getLink());
+            intent.putExtra("image", post.getJetpackFeaturedMediaUrl());
+            startActivity(intent);
+        }
     }
 
     @Override

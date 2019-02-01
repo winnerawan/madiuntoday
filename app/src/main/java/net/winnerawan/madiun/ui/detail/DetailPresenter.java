@@ -23,6 +23,12 @@ public class DetailPresenter<V extends DetailView> extends BasePresenter<V> impl
         super.onAttach(mvpView);
     }
 
+
+    @Override
+    public String getBanner() {
+        return getDataManager().getBanner();
+    }
+
     @Override
     public void getArticle(String url) {
         getCompositeDisposable().add(getDataManager().getArticle(url)

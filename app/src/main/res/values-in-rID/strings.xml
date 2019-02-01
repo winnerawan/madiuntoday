@@ -5,7 +5,7 @@
     <string name="some_error">Some Error Occurred!</string>
     <string name="connection_error">Internet connection lost!</string>
     <!--play store-->
-    <string name="appid">ca-app-pub-9400864410179150~6165476966</string>
+    <string name="appid">ca-app-pub-2915636858158140~5178572620</string>
     <string name="app_google_play_store_link">"https://play.google.com/store/apps/details?id="</string>
     <string name="app_market_link">"market://details?id="</string>
     <string name="signup"><b><u>Sign Up</u></b></string>
@@ -20,7 +20,7 @@
     <string name="action_tv">TV</string>
     <string name="picture_transition_name">picture transition</string>
     <string name="title_source_url_article">Tautan sumber</string>
-    <string name="food_merchant_label_call_button">CALL</string>
+    <string name="food_merchant_label_call_button">HUBUNGI</string>
     <string name="telp">tel: 0351467327</string>
     <string name="dinas_kominfo">Dinas Komunikasi dan Informatika Kota Madiun</string>
     <string name="dev">DEVELOPER</string>
@@ -44,5 +44,6 @@
     <string name="choose">Pilih satu</string>
     <string name="share_by">Dibagikan dengan aplikasi MADIUN TODAY</string>
     <string name="share_by_link">https://play.google.com/store/apps/details?id=net.winnerawan.madiun</string>
+    <string name="categories">KATEGORI</string>
 
 </resources>

@@ -13,6 +13,9 @@ import android.view.ViewGroup;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import com.facebook.shimmer.ShimmerFrameLayout;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import net.winnerawan.madiun.R;
 import net.winnerawan.madiun.data.network.model.Category;
 import net.winnerawan.madiun.data.network.model.Post;
@@ -48,6 +51,9 @@ public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRef
 
     private List<Post> posts;
     private int index = 1;
+    private InterstitialAd mInterstitialAd;
+    @Inject
+    AdRequest adRequest;
     public static DBHCHTFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -87,6 +93,10 @@ public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRef
 
     @Override
     protected void setUp(View view) {
+        mInterstitialAd = new InterstitialAd(getBaseActivity());
+        mInterstitialAd.setAdUnitId(presenter.getInters());
+        mInterstitialAd.loadAd(adRequest);
+
         category = new Category();
         category.setId(105);
         category.setName("DBH CHT");
@@ -126,7 +136,34 @@ public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRef
         intent.putExtra("post", post);
         intent.putExtra("url", post.getLink());
         intent.putExtra("image", post.getJetpackFeaturedMediaUrl());
+        intent.putExtra("ads_enable", false);
         startActivity(intent);
+    }
+
+    @Override
+    public void onPostSelectedWithAds(Post post) {
+        if (mInterstitialAd.isLoaded()) {
+            mInterstitialAd.show();
+            mInterstitialAd.setAdListener(new AdListener() {
+                @Override
+                public void onAdClosed() {
+                    mInterstitialAd.loadAd(adRequest);
+                    Intent intent = new Intent(getBaseActivity(), DetailActivity.class);
+                    intent.putExtra("post", post);
+                    intent.putExtra("url", post.getLink());
+                    intent.putExtra("image", post.getJetpackFeaturedMediaUrl());
+                    intent.putExtra("ads_enable", true);
+                    startActivity(intent);
+                    super.onAdClosed();
+                }
+            });
+        } else {
+            Intent intent = new Intent(getBaseActivity(), DetailActivity.class);
+            intent.putExtra("post", post);
+            intent.putExtra("url", post.getLink());
+            intent.putExtra("image", post.getJetpackFeaturedMediaUrl());
+            startActivity(intent);
+        }
     }
 
     @Override

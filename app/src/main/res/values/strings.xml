@@ -5,7 +5,7 @@
     <string name="some_error">Some Error Occurred!</string>
     <string name="connection_error">Internet connection lost!</string>
     <!--play store-->
-    <string name="appid">ca-app-pub-9400864410179150~6165476966</string>
+    <string name="appid">ca-app-pub-2915636858158140~5178572620</string>
     <string name="app_google_play_store_link">"https://play.google.com/store/apps/details?id="</string>
     <string name="app_market_link">"market://details?id="</string>
     <string name="signup"><b><u>Sign Up</u></b></string>
@@ -44,5 +44,6 @@
     <string name="choose">Choose One</string>
     <string name="share_by">Share with MADIUN TODAY APP</string>
     <string name="share_by_link">https://play.google.com/store/apps/details?id=net.winnerawan.madiun</string>
+    <string name="categories">CATEGORIES</string>
 
 </resources>

@@ -8,4 +8,6 @@ public interface DetailMvpPresenter<V extends DetailView> extends MvpPresenter<V
     String getIntersId();
     void getArticle(String url);
     void getRelated(Category category);
+
+    String getBanner();
 }

@@ -18,7 +18,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Light"
         app:navigationIcon="@drawable/ic_arrow_back_black_24dp"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:title="Kategoriku"
+        app:title="@string/categories"
         app:titleTextColor="@color/black" />
 
 

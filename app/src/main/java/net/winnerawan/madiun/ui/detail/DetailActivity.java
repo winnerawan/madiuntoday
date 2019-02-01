@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -68,8 +69,12 @@ public class DetailActivity extends BaseActivity implements DetailView, HeadLine
     PageIndicatorView indicator;
     @BindView(R.id.txt_time)
     TextView txtDate;
+    @BindView(R.id.containerAds)
+    LinearLayout mAds;
 
     private Post post;
+    private boolean isAdsEnable;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,8 +87,6 @@ public class DetailActivity extends BaseActivity implements DetailView, HeadLine
         setUp();
     }
 
-
-
     @Override
     protected void setUp() {
         adapter.setCallback(this);
@@ -92,17 +95,15 @@ public class DetailActivity extends BaseActivity implements DetailView, HeadLine
         Bundle bundle = getIntent().getExtras();
         if (bundle!=null) {
             post = (Post) bundle.getSerializable("post");
+            isAdsEnable = bundle.getBoolean("ads_enable");
             if (post!=null) {
                 setUpPost(post);
+                showBannerAds(isAdsEnable);
             } else {
                 //todo from deeplink
 
             }
         }
-//        mInterstitialAd = new InterstitialAd(getApplicationContext());
-//        mInterstitialAd.setAdUnitId(presenter.getIntersId());
-//
-//        mInterstitialAd.loadAd(adRequest);
     }
 
     @OnClick(R.id.txt_source)
@@ -221,6 +222,15 @@ public class DetailActivity extends BaseActivity implements DetailView, HeadLine
         }
         if(post.getDate()!=null) {
             txtDate.setText(CommonUtils.prettyDateFormat(post.getDate()));
+        }
+    }
+
+    private void showBannerAds(boolean isAdsEnable) {
+        if (isAdsEnable) {
+            adView.setAdSize(AdSize.BANNER);
+            adView.setAdUnitId(presenter.getBanner());
+            mAds.addView(adView);
+            adView.loadAd(adRequest);
         }
     }
 }

@@ -18,6 +18,11 @@ public class DBHCHTPresenter<V extends DBHCHTView> extends BasePresenter<V> impl
     }
 
     @Override
+    public String getInters() {
+        return getDataManager().getInters();
+    }
+
+    @Override
     public void getDbhCht(Category category, int page) {
         getCompositeDisposable().add(getDataManager().getNews(category, page)
                 .observeOn(getSchedulerProvider().ui())

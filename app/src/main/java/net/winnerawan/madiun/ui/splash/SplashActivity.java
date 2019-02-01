@@ -14,7 +14,7 @@ import net.winnerawan.madiun.ui.main.MainActivity;
 public class SplashActivity extends BaseActivity implements SplashView {
 
     @Inject
-    SplashMvpPresenter<SplashView> mPresenter;
+    SplashMvpPresenter<SplashView> presenter;
 
     private static final int SPLASH_TIME_OUT = 2500;
 
@@ -26,13 +26,13 @@ public class SplashActivity extends BaseActivity implements SplashView {
 
         setUnBinder(ButterKnife.bind(this));
 
-        mPresenter.onAttach(this);
+        presenter.onAttach(this);
         setUp();
     }
 
     @Override
     protected void setUp() {
-        //mPresenter.app();
+        presenter.app();
         startSplashAnimation();
 
         new Handler().postDelayed(() -> {

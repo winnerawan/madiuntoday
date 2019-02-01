@@ -6,5 +6,5 @@ public interface MainMvpPresenter<V extends MainView> extends MvpPresenter<V> {
 
     String getIntersId();
 
-
+    boolean isAdsEnable();
 }

@@ -15,6 +15,7 @@ import butterknife.BindView;
 import com.bumptech.glide.Glide;
 import net.winnerawan.madiun.R;
 import net.winnerawan.madiun.data.network.model.Post;
+import net.winnerawan.madiun.utils.AppConstants;
 import net.winnerawan.madiun.utils.AppLogger;
 import net.winnerawan.madiun.utils.CommonUtils;
 
@@ -31,6 +32,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     OnLoadMoreListener loadMoreListener;
     private static Callback callback;
     boolean isLoading = false, isMoreDataAvailable = true;
+    private static boolean isAdsEnable;
 
     /*
      * isLoading - to set the remote loading and complete status to fix back to back load more call
@@ -93,8 +95,12 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         TextView txtCategory;
 
+
         public MovieHolder(View itemView) {
             super(itemView);
+            SharedPreferences preferences = itemView.getContext().getSharedPreferences(AppConstants.PREF_NAME, Context.MODE_PRIVATE);
+
+            isAdsEnable = preferences.getBoolean("KEY_ADS_ENABLE", false);
 
             imageView = (ImageView) itemView.findViewById(R.id.image);
             txtCategory = (TextView) itemView.findViewById(R.id.category);
@@ -104,7 +110,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         void bindData(Post post) {
             if (post.getJetpackFeaturedMediaUrl() != null) {
-                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     imageView.setClipToOutline(true);
                 }
                 Glide.with(itemView.getContext())
@@ -114,22 +120,21 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                         .error(R.mipmap.ic_launcher)
                         .into(imageView);
             }
-            if (post.getTitle()!=null) {
+            if (post.getTitle() != null) {
                 txtTitle.setText(post.getTitle().getRendered());
             }
 
-            if (post.getDate()!=null) {
+            if (post.getDate() != null) {
                 txtDate.setText(CommonUtils.prettyDateFormat(post.getDate()));
             }
 
             itemView.setOnClickListener(v -> {
-                if (post.getId() != null) {
-                    try {
-                        callback.onPostSelected(post);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+                if (!isAdsEnable) {
+                    callback.onPostSelected(post);
+                } else {
+                    callback.onPostSelectedWithAds(post);
                 }
+
             });
         }
     }
@@ -137,6 +142,7 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public static class LoadHolder extends RecyclerView.ViewHolder {
 
         ProgressBar progressBar;
+
         public LoadHolder(View itemView) {
             super(itemView);
 
@@ -172,6 +178,8 @@ public class NewsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public interface Callback {
         void onPostSelected(Post post);
+
+        void onPostSelectedWithAds(Post post);
     }
 
     public void setCallback(Callback mCallback) {

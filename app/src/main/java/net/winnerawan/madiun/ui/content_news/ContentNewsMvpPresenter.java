@@ -6,4 +6,8 @@ import net.winnerawan.madiun.ui.base.MvpPresenter;
 
 public interface ContentNewsMvpPresenter<V extends ContentNewsView> extends MvpPresenter<V> {
     void getNews(Category category, int page);
+
+    String getInters();
+
+    String getBanner();
 }

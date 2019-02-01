@@ -33,10 +33,10 @@ public class SplashPresenter<V extends SplashView> extends BasePresenter<V> impl
                 .subscribe(app -> {
                     if (app!=null) {
                         getDataManager().setYoutubeKey(app.getYoutubeKey());
-                        getDataManager().setAdEnable(app.isAdsEnable());
                         getDataManager().setBanner(app.getAds().getBanner());
                         getDataManager().setInters(app.getAds().getInter());
-                        AppLogger.e("ADS: "+app.getAds().getInter());
+                        getDataManager().setAdEnable(app.isAdsEnable());
+                        //AppLogger.e("ADS: "+app.isAdsEnable());
                     }
 
                 }, throwable -> {

@@ -127,6 +127,10 @@
                                 attrs:piv_radius="2dp"/>
                     </android.support.v7.widget.CardView>
 
+                    <LinearLayout android:orientation="vertical" android:layout_gravity="center" android:id="@+id/containerAds" android:layout_width="match_parent"
+                                  android:layout_height="wrap_content">
+
+                    </LinearLayout>
                     <org.sufficientlysecure.htmltextview.HtmlTextView
                             android:id="@+id/center"
                             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
