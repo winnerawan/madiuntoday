@@ -170,8 +170,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<List<Post>> getNews(Category category) {
-        return mApiHelper.getNews(category);
+    public Single<List<Post>> getNews(Category category, int page) {
+        return mApiHelper.getNews(category, page);
     }
 
     @Override
@@ -180,8 +180,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<List<Gallery>> getGalleries(Category category) {
-        return mApiHelper.getGalleries(category);
+    public Single<List<Gallery>> getGalleries(Category category, int page) {
+        return mApiHelper.getGalleries(category, page);
     }
 
     @Override

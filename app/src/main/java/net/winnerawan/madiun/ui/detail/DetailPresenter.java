@@ -55,7 +55,7 @@ public class DetailPresenter<V extends DetailView> extends BasePresenter<V> impl
 
     @Override
     public void getRelated(Category category) {
-        getCompositeDisposable().add(getDataManager().getNews(category)
+        getCompositeDisposable().add(getDataManager().getNews(category, 1)
                 .observeOn(getSchedulerProvider().ui())
                 .subscribeOn(getSchedulerProvider().io())
                 .subscribe(posts -> {

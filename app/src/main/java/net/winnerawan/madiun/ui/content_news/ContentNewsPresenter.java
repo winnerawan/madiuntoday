@@ -28,8 +28,8 @@ public class ContentNewsPresenter<V extends ContentNewsView> extends BasePresent
     }
 
     @Override
-    public void getNews(Category category) {
-        getCompositeDisposable().add(getDataManager().getNews(category)
+    public void getNews(Category category, int page) {
+        getCompositeDisposable().add(getDataManager().getNews(category, page)
                 .observeOn(getSchedulerProvider().ui())
                 .subscribeOn(getSchedulerProvider().io())
                 .subscribe(posts -> {

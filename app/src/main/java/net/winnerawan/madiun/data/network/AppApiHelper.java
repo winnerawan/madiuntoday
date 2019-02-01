@@ -65,8 +65,10 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Single<List<Post>> getNews(Category category) {
+    public Single<List<Post>> getNews(Category category, int page) {
         return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_POST_BY_CATEGORY)
+                .addQueryParameter("page", String.valueOf(page))
+                .addQueryParameter("per_page", String.valueOf(10))
                 .addQueryParameter("categories", String.valueOf(category.getId()))
                 .build()
                 .getObjectListSingle(Post.class);
@@ -81,9 +83,10 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Single<List<Gallery>> getGalleries(Category category) {
+    public Single<List<Gallery>> getGalleries(Category category, int page) {
         return  Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_POST_BY_CATEGORY)
                 .addQueryParameter("categories", String.valueOf(category.getId()))
+                .addQueryParameter("page", String.valueOf(page))
                 .build()
                 .getObjectListSingle(Gallery.class);
     }

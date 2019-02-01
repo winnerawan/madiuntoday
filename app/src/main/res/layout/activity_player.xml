@@ -1,0 +1,32 @@
+<net.winnerawan.madiun.ui.player.PlayerDragLayout
+        android:visibility="invisible"
+        android:id="@+id/dragLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+            android:orientation="vertical" android:id="@+id/player_content"
+            android:background="@android:color/black" android:layout_width="match_parent"
+            android:layout_height="204dp">
+        <!--<com.google.android.exoplayer2.ui.SimpleExoPlayerView-->
+                <!--android:id="@+id/player_view"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:focusable="true"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--app:controller_layout_id="@layout/exoplayer_custom"/>-->
+        <ProgressBar android:id="@+id/progressBar"
+                     android:visibility="invisible" android:layout_width="32dp"
+                     android:layout_height="35dp" android:layout_centerHorizontal="true"
+                     android:layout_centerVertical="true"/>
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+            android:background="@color/white"
+            android:id="@+id/recycler_other_videos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+</net.winnerawan.madiun.ui.player.PlayerDragLayout>

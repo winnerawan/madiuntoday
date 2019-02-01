@@ -8,11 +8,13 @@ import net.winnerawan.madiun.ui.detail.DetailActivity;
 import net.winnerawan.madiun.ui.gallery.GalleryFragment;
 import net.winnerawan.madiun.ui.main.MainActivity;
 import net.winnerawan.madiun.ui.news.NewsFragment;
+import net.winnerawan.madiun.ui.player.PlayerActivity;
 import net.winnerawan.madiun.ui.search.SearchActivity;
 import net.winnerawan.madiun.ui.splash.SplashActivity;
 import dagger.Component;
 import net.winnerawan.madiun.di.PerActivity;
 import net.winnerawan.madiun.di.module.ActivityModule;
+import net.winnerawan.madiun.ui.stream.StreamActivity;
 import net.winnerawan.madiun.ui.tv.TvFragment;
 import net.winnerawan.madiun.ui.webview.WebviewActivity;
 
@@ -50,4 +52,8 @@ public interface ActivityComponent {
     void inject(SearchActivity searchActivity);
 
     void inject(CategoryActivity categoryActivity);
+
+    void inject(PlayerActivity playerActivity);
+
+    void inject(StreamActivity streamActivity);
 }

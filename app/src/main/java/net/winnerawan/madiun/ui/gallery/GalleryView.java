@@ -11,6 +11,4 @@ public interface GalleryView extends MvpView {
 
     void showGalleries(List<Gallery> galleries);
 
-    void setDisableRefreshLayout();
-
 }

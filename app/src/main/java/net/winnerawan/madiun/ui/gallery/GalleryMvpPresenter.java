@@ -5,5 +5,5 @@ import net.winnerawan.madiun.ui.base.MvpPresenter;
 
 public interface GalleryMvpPresenter<V extends GalleryView> extends MvpPresenter<V> {
 
-    void getGalleries(Category category);
+    void getGalleries(Category category, int page);
 }

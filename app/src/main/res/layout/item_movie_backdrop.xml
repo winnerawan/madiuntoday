@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    android:id="@+id/lyt_container_home_adapter"
+                                    android:layout_width="fill_parent"
+                                    android:layout_marginTop="@dimen/padding_8dp"
+                                    android:layout_marginLeft="@dimen/padding_8dp"
+                                    android:layout_marginRight="@dimen/padding_8dp"
+                                    app:cardElevation="3dp"
+                                    app:cardCornerRadius="3dp"
+                                    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_content"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_img_content"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_img_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_gradasi2"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/height_img_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="right"
+            android:padding="@dimen/padding_16dp">
+
+            <FrameLayout
+                android:id="@+id/lyt_episode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                        android:padding="@dimen/padding_4dp"
+                        android:background="@drawable/time_bg"
+                        android:id="@+id/txt_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/white"/>
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="bottom|center|right"
+            android:paddingBottom="@dimen/padding_16dp"
+            android:paddingRight="@dimen/padding_16dp">
+
+            <ImageView
+                android:id="@+id/img_add_to_my_list"
+                android:layout_width="@dimen/width_24dp"
+                android:layout_height="@dimen/height_24dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="bottom|center|left"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/padding_16dp"
+            android:paddingLeft="@dimen/padding_10dp"
+            android:paddingRight="@dimen/padding_10dp">
+
+            <!--<TextView-->
+                <!--android:id="@+id/txt_session"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:textSize="14sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:textColor="@color/white"/>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5.0">
+
+                <!--<TextView-->
+                    <!--android:id="@+id/txt_sub_title"-->
+                    <!--android:layout_width="@dimen/nol_dp"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="4.0"-->
+                    <!--android:ellipsize="end"-->
+                    <!--android:maxLines="1"-->
+                    <!--android:singleLine="true"-->
+                    <!--android:textColor="@color/white"/>-->
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>

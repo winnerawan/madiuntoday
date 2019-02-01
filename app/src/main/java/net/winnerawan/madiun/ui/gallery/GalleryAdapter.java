@@ -29,12 +29,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private static Callback callback;
     boolean isLoading = false, isMoreDataAvailable = true;
     private HashMap<Integer, Integer> mViewPageStates = new HashMap<>();
-    /*
-     * isLoading - to set the remote loading and complete status to fix back to back load more call
-     * isMoreDataAvailable - to set whether more data from server available or not.
-     * It will prevent useless load more request even after all the server data loaded
-     * */
-
 
     public GalleryAdapter(Context context, List<Gallery> mGalleries) {
         this.context = context;
@@ -43,12 +37,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        LayoutInflater inflater = LayoutInflater.from(context);
-//        if (viewType == TYPE_MOVIE) {
-//            return new GalleryHolder(inflater.inflate(R.layout.item_gallery, parent, false));
-//        } else {
-//            return new LoadHolder(inflater.inflate(R.layout.item_image, parent, false));
-//        }
         RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         switch (viewType) {
@@ -109,25 +97,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
 
         void bindData(Gallery gallery) {
-//            if (gallery.getImages() != null) {
-//                Glide.with(itemView.getContext())
-//                        .load(BASE_URL + "/images/" + movie.getImgs())
-//                        .asBitmap()
-//                        .centerCrop()
-//                        .into(imgPoster);
-//            }
 
-
-
-            itemView.setOnClickListener(v -> {
-//                if (gallery.ge() != null) {
-//                    try {
-//                        callback.onMovieSelected(movie);
-//                    } catch (Exception e) {
-//                        AppLogger.d("id error");
-//                    }
-//                }
-            });
         }
     }
 
@@ -138,18 +108,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         GalleryPagerAdapter pagerAdapter = new GalleryPagerAdapter(gallery.getImages(), context);
         holder.viewPager.setAdapter(pagerAdapter);
         if (gallery.getDescription()!=null) {
-//            String regexAuthor = "(a-zA-Z)";
-//            String description = gallery.getDescription();
-//
-//            String desc = description.replaceAll(regexAuthor, "");
-//
-//            Pattern pattern = Pattern.compile(regexAuthor);
-//            Matcher matcher = pattern.matcher(gallery.getDescription());
-//            String author = matcher.toString();
+
             holder.txtDescription.setText(android.text.Html.fromHtml(gallery.getDescription()).toString());
-//            holder.txtAuthor.setText(author);
         }
-//        pagerAdapter.registerDataSetObserver(holder.indicator.getDa());
     }
 
     @Override
@@ -173,14 +134,10 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         isMoreDataAvailable = moreDataAvailable;
     }
 
-    /* notifyDataSetChanged is final method so we can't override it
-         call adapter.notifyDataChanged(); after update the list
-         */
     public void notifyDataChanged() {
         notifyDataSetChanged();
         isLoading = false;
     }
-
 
     public interface OnLoadMoreListener {
         void onLoadMore();
@@ -191,7 +148,6 @@ public class GalleryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     }
 
     public interface Callback {
-        void onMovieSelected(Gallery movie);
     }
 
     public void setCallback(Callback mCallback) {

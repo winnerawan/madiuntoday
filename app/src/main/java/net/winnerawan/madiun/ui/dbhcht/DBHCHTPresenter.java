@@ -18,8 +18,8 @@ public class DBHCHTPresenter<V extends DBHCHTView> extends BasePresenter<V> impl
     }
 
     @Override
-    public void getDbhCht(Category category) {
-        getCompositeDisposable().add(getDataManager().getNews(category)
+    public void getDbhCht(Category category, int page) {
+        getCompositeDisposable().add(getDataManager().getNews(category, page)
                 .observeOn(getSchedulerProvider().ui())
                 .subscribeOn(getSchedulerProvider().io())
                 .subscribe(posts -> {

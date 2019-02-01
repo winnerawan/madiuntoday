@@ -18,6 +18,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import net.winnerawan.madiun.utils.CommonUtils;
 
 public class HeadLineAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
@@ -78,8 +79,7 @@ public class HeadLineAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public interface Callback {
-        void onPostSelected(Post app);
-        void onDownloadClicked(Post app);
+        void onPostSelected(Post post);
     }
 
     public class ViewHolder extends BaseViewHolder {
@@ -90,8 +90,8 @@ public class HeadLineAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @BindView(R.id.txt_title)
         TextView txtTitle;
 
-//        @BindView(R.id.txt_time)
-//        TextView txtDate;
+        @BindView(R.id.txt_time)
+        TextView txtDate;
 
 //        @BindView(R.id.date)
 //        TextView txtDate;
@@ -116,18 +116,22 @@ public class HeadLineAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 }
                 Glide.with(itemView.getContext())
                         .load(post.getJetpackFeaturedMediaUrl())
-                        .asBitmap()
                         .centerCrop()
+                        .crossFade()
                         .into(imageView);
             }
             if (post.getTitle()!=null) {
                 txtTitle.setText(post.getTitle().getRendered());
             }
 
+            if (post.getDate()!=null) {
+                txtDate.setText(CommonUtils.prettyDateFormat(post.getDate()));
+            }
+
             itemView.setOnClickListener(v -> {
                 if (post.getId() != null) {
                     try {
-                        mCallback.onDownloadClicked(post);
+                        mCallback.onPostSelected(post);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

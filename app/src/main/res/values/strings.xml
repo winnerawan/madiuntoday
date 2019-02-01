@@ -34,8 +34,15 @@
     <string name="mdt_desc">Madiuntoday.id menyediakan informasi dan berita seputar Kota Madiun. Tujuannya untuk memudahkan layanan berita kepada warga Kota Madiun tanpa batasan waktu dan tempat. Juga sebagai sarana sosialisasi ketentuan cukai.
     Madiuntoday.id berdiri sejak Oktober 2017 di bawah naungan Dinas Komunikasi dan Informatika Kota Madiun. Reportase disajikan berupa berita tulisan, berita foto maupun video. Topik yang dibahas berkaitan dengan ekonomi, pendidikan, kesehatan, olahraga, sosial budaya, maupun peristiwa yang terjadi di Kota Madiun.
     Operasional madiuntoday.id dibiayai menggunakan Dana Bagi Hasil Cukai Hasil Tembakau (DBH-CHT). Madiuntoday.id tidak memiliki afiliasi apapun dengan partai politik atau kelompok kepentingan tertentu sehingga menjamin netralitas.</string>
-    <string name="related_post">Related news</string>
+    <string name="related_post">Related News</string>
     <string name="search_hint">Search</string>
     <string name="title_edit">Edit</string>
     <string name="title_complete">Done</string>
+    <string name="sharefacebook">Share on Facebook</string>
+    <string name="sharewhatsapp">Share on WhatsApp</string>
+    <string name="share">Share</string>
+    <string name="choose">Choose One</string>
+    <string name="share_by">Share with MADIUN TODAY APP</string>
+    <string name="share_by_link">https://play.google.com/store/apps/details?id=net.winnerawan.madiun</string>
+
 </resources>

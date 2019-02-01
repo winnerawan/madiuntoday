@@ -108,7 +108,7 @@ public class VideosAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             if (video.getSnippet().getThumbnails().getHigh()!=null) {
                 Glide.with(itemView.getContext())
                         .load(video.getSnippet().getThumbnails().getHigh().getUrl())
-                        .asBitmap()
+                        .crossFade()
                         .centerCrop()
                         .error(R.mipmap.ic_launcher)
                         .into(imageView);

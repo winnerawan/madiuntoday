@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto" android:gravity="center"
+                android:background="@android:color/black" android:layout_width="match_parent"
+                android:layout_height="match_parent">
+    <com.dailymotion.websdk.DMWebVideoView android:configChanges="orientation|screenSize"
+                                           android:id="@+id/dmWebVideoView" android:layout_width="match_parent"
+                                           android:layout_height="300dp"/>
+    <LinearLayout android:orientation="vertical" android:id="@+id/lyt_on_touch"
+                  android:paddingTop="@dimen/padding_top_15dp" android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+        <LinearLayout android:orientation="horizontal" android:paddingLeft="@dimen/padding_left_15dp"
+                      android:paddingRight="@dimen/padding_right_15dp" android:layout_width="match_parent"
+                      android:layout_height="wrap_content">
+            <ImageView android:id="@+id/img_back" android:layout_width="@dimen/width_25dp"
+                       android:layout_height="@dimen/height_25dp"
+                       android:scaleType="fitXY"/>
+        </LinearLayout>
+        <LinearLayout android:gravity="bottom" android:orientation="vertical" android:visibility="invisible"
+                      android:layout_width="match_parent" android:layout_height="@dimen/nol_dp"
+                      android:layout_weight="1">
+            <LinearLayout android:gravity="left" android:orientation="vertical"
+                          android:background="@color/bg_Detail_video" android:paddingLeft="@dimen/padding_left_23dp"
+                          android:paddingTop="@dimen/padding_top_10dp" android:paddingRight="@dimen/padding_right_30dp"
+                          android:paddingBottom="@dimen/padding_bottom_8dp" android:visibility="invisible"
+                          android:layout_width="@dimen/width_233dp" android:layout_height="wrap_content">
+                <TextView android:textSize="@dimen/txt_session" android:textColor="@color/txt_session"
+                          android:id="@+id/txt_session" android:layout_width="wrap_content"
+                          android:layout_height="wrap_content" />
+                <TextView android:textSize="@dimen/txt_title" android:textColor="@color/txt_title"
+                          android:id="@+id/txt_title" android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"/>
+                <TextView android:textSize="@dimen/txt_sub_title" android:textColor="@color/txt_sub_title"
+                          android:ellipsize="end" android:id="@+id/txt_sub_title"
+                          android:paddingBottom="@dimen/padding_bottom_15dp" android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:singleLine="true"/>
+                <LinearLayout android:orientation="horizontal" android:layout_width="wrap_content"
+                              android:layout_height="30dp">
+                    <ImageView android:id="@+id/img_rate" android:layout_width="@dimen/width_25dp"
+                               android:layout_height="@dimen/height_25dp"
+                               android:scaleType="fitXY"/>
+                    <View android:layout_width="15dp" android:layout_height="wrap_content"/>
+                    <ImageView android:id="@+id/img_watch_list" android:visibility="gone"
+                               android:layout_width="@dimen/width_25dp" android:layout_height="@dimen/height_25dp"
+                                android:scaleType="fitXY"/>
+                    <View android:visibility="gone" android:layout_width="15dp" android:layout_height="wrap_content"/>
+                    <ImageView android:id="@+id/img_comment" android:layout_width="@dimen/width_25dp"
+                               android:layout_height="@dimen/height_25dp"
+                               android:scaleType="fitXY"/>
+                    <View android:layout_width="15dp" android:layout_height="wrap_content"/>
+                    <ImageView android:id="@+id/img_share" android:layout_width="@dimen/width_25dp"
+                               android:layout_height="@dimen/height_25dp"
+                               android:scaleType="fitXY"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

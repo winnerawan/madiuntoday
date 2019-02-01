@@ -43,7 +43,7 @@ public class GalleryPagerAdapter extends PagerAdapter {
         if (data.getImage() != null) {
             Glide.with(mContext)
                     .load(data.getImage())
-                    .asBitmap()
+                    .crossFade()
                     .centerCrop()
                     .error(R.mipmap.ic_launcher)
                     .into(holder.imageView);

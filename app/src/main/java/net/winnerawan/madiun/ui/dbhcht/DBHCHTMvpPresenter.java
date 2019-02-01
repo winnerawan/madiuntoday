@@ -5,5 +5,5 @@ import net.winnerawan.madiun.ui.base.MvpPresenter;
 
 public interface DBHCHTMvpPresenter<V extends DBHCHTView> extends MvpPresenter<V> {
 
-    void getDbhCht(Category category);
+    void getDbhCht(Category category, int page);
 }

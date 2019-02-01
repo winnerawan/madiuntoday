@@ -25,9 +25,9 @@ public interface ApiHelper {
 
     Single<List<Post>> getPosts();
 
-    Single<List<Post>> getNews(Category category);
+    Single<List<Post>> getNews(Category category, int page);
 
-    Single<List<Gallery>> getGalleries(Category category);
+    Single<List<Gallery>> getGalleries(Category category, int page);
 
     Single<GalleryResponse> fetchGallery(String url);
 

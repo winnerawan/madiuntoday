@@ -25,14 +25,16 @@ public class GalleryPresenter<V extends GalleryView> extends BasePresenter<V> im
     }
 
     @Override
-    public void getGalleries(Category category) {
-        getCompositeDisposable().add(getDataManager().getGalleries(category)
+    public void getGalleries(Category category, int page) {
+        getCompositeDisposable().add(getDataManager().getGalleries(category, page)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(galleries -> {
-                    if (galleries != null) {
-                        reGenerateGalleries(galleries);
+                    if (!isViewAttached()) return;
+                    if (galleries == null) {
+                        return;
                     }
+                    reGenerateGalleries(galleries);
                 }, throwable -> {
                     if (!isViewAttached()) {
                         return;
@@ -54,7 +56,6 @@ public class GalleryPresenter<V extends GalleryView> extends BasePresenter<V> im
                     .subscribeOn(getSchedulerProvider().io())
                     .subscribe(galleryResponse -> {
                         if (!isViewAttached()) return;
-                        getMvpView().setDisableRefreshLayout();
 
                         if (galleryResponse == null) {
                             return;

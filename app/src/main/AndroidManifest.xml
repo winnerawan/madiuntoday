@@ -23,12 +23,27 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="http"
+                      android:host="madiuntoday.id"
+                      android:pathPrefix="/" />
+                <data android:scheme="http"
+                      android:host="madiuntoday.id/" />
+            </intent-filter>
         </activity>
         <activity android:name="net.winnerawan.madiun.ui.main.MainActivity"/>
-        <activity android:name="net.winnerawan.madiun.ui.detail.DetailActivity"/>
+        <activity android:name="net.winnerawan.madiun.ui.detail.DetailActivity">
+
+        </activity>
         <activity android:name=".ui.webview.WebviewActivity"/>
         <activity android:name=".ui.search.SearchActivity"/>
         <activity android:name=".ui.category.CategoryActivity"/>
+        <activity android:name=".ui.player.PlayerActivity"
+                  android:configChanges="orientation|screenSize|keyboardHidden|smallestScreenSize|screenLayout"/>
+        <activity android:name=".ui.stream.StreamActivity"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="bff4848b3ed3df68b8971fa1cb1fab790ba7cccc" />

@@ -10,6 +10,7 @@ import net.winnerawan.madiun.ui.about.AboutMvpPresenter;
 import net.winnerawan.madiun.ui.about.AboutPresenter;
 import net.winnerawan.madiun.ui.about.AboutView;
 import net.winnerawan.madiun.ui.adapter.HeadLineAdapter;
+import net.winnerawan.madiun.ui.adapter.NewsAdapter;
 import net.winnerawan.madiun.ui.adapter.PostAdapter;
 import net.winnerawan.madiun.ui.category.*;
 import net.winnerawan.madiun.ui.content_news.ContentNewsMvpPresenter;
@@ -34,6 +35,9 @@ import net.winnerawan.madiun.di.ActivityContext;
 import net.winnerawan.madiun.ui.news.NewsMvpPresenter;
 import net.winnerawan.madiun.ui.news.NewsPresenter;
 import net.winnerawan.madiun.ui.news.NewsView;
+import net.winnerawan.madiun.ui.player.PlayerMvpPresenter;
+import net.winnerawan.madiun.ui.player.PlayerPresenter;
+import net.winnerawan.madiun.ui.player.PlayerView;
 import net.winnerawan.madiun.ui.search.SearchMvpPresenter;
 import net.winnerawan.madiun.ui.search.SearchPresenter;
 import net.winnerawan.madiun.ui.search.SearchView;
@@ -190,6 +194,17 @@ public class ActivityModule {
         return presenter;
     }
 
+    @Provides
+    @PerActivity
+    PlayerMvpPresenter<PlayerView> providePlayerPresenter(
+            PlayerPresenter<PlayerView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    NewsAdapter provideNewsAdapter() {
+        return new NewsAdapter(mActivity.getApplicationContext(), new ArrayList<>());
+    }
 
     @Provides
     PostAdapter providePostAdapter() {

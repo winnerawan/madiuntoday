@@ -1,5 +1,7 @@
 package net.winnerawan.madiun.ui.detail;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,10 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.bumptech.glide.Glide;
-import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.rd.PageIndicatorView;
+import net.winnerawan.madiun.BuildConfig;
 import net.winnerawan.madiun.R;
 import net.winnerawan.madiun.data.network.model.Article;
 import net.winnerawan.madiun.data.network.model.Category;
@@ -24,12 +27,13 @@ import net.winnerawan.madiun.ui.adapter.HeadLineAdapter;
 import net.winnerawan.madiun.ui.base.BaseActivity;
 import com.google.android.gms.ads.*;
 import net.winnerawan.madiun.ui.gallery.GalleryPagerAdapter;
+import net.winnerawan.madiun.utils.CommonUtils;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import javax.inject.Inject;
 import java.util.List;
 
-public class DetailActivity extends BaseActivity implements DetailView {
+public class DetailActivity extends BaseActivity implements DetailView, HeadLineAdapter.Callback {
 
     @Inject
     DetailMvpPresenter<DetailView> presenter;
@@ -62,6 +66,9 @@ public class DetailActivity extends BaseActivity implements DetailView {
     ImageView mImageView;
     @BindView(R.id.pageIndicatorView)
     PageIndicatorView indicator;
+    @BindView(R.id.txt_time)
+    TextView txtDate;
+
     private Post post;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +86,7 @@ public class DetailActivity extends BaseActivity implements DetailView {
 
     @Override
     protected void setUp() {
+        adapter.setCallback(this);
         mToolbar.setTitle(" ");
         setSupportActionBar(mToolbar);
         Bundle bundle = getIntent().getExtras();
@@ -86,6 +94,9 @@ public class DetailActivity extends BaseActivity implements DetailView {
             post = (Post) bundle.getSerializable("post");
             if (post!=null) {
                 setUpPost(post);
+            } else {
+                //todo from deeplink
+
             }
         }
 //        mInterstitialAd = new InterstitialAd(getApplicationContext());
@@ -94,9 +105,37 @@ public class DetailActivity extends BaseActivity implements DetailView {
 //        mInterstitialAd.loadAd(adRequest);
     }
 
+    @OnClick(R.id.txt_source)
+    void gotoSource() {
+        Intent dial = new Intent(Intent.ACTION_VIEW);
+        dial.setData(Uri.parse(post.getLink()));
+        startActivity(dial);
+    }
+
+    @OnClick(R.id.txt_share)
+    void share() {
+        try {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, post.getTitle().getRendered());
+            String referrerMessage = getString(R.string.app_name);
+            referrerMessage = referrerMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+            String shareMessage = post.getLink();
+            shareMessage = shareMessage +"\n\n\n" + getString(R.string.share_by) +"\n" + getString(R.string.share_by_link);
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+            shareIntent.putExtra(Intent.EXTRA_REFERRER, referrerMessage);
+            startActivity(Intent.createChooser(shareIntent, getString(R.string.choose)));
+        } catch(Exception e) {
+            //e.toString();
+        }
+    }
+
     @Override
     public void showArticle(Article article) {
         setUpArticle(article);
+        Category category = new Category();
+        category.setId(post.getCategories().get(0));
+        presenter.getRelated(category);
     }
 
     @Override
@@ -104,6 +143,17 @@ public class DetailActivity extends BaseActivity implements DetailView {
         pagerAdapter = new GalleryPagerAdapter(images, getApplicationContext());
         viewPager.setAdapter(pagerAdapter);
     }
+
+    @Override
+    public void onPostSelected(Post post) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("post", post);
+        intent.putExtra("url", post.getLink());
+        intent.putExtra("image", post.getJetpackFeaturedMediaUrl());
+        startActivity(intent);
+        finish();
+    }
+
 
     @Override
     public void showImage() {
@@ -169,10 +219,8 @@ public class DetailActivity extends BaseActivity implements DetailView {
         if (post.getLink()!=null) {
             presenter.getArticle(post.getLink());
         }
-        if (post.getCategories()!=null) {
-            Category category = new Category();
-            category.setId(post.getCategories().get(0));
-            presenter.getRelated(category);
+        if(post.getDate()!=null) {
+            txtDate.setText(CommonUtils.prettyDateFormat(post.getDate()));
         }
     }
 }

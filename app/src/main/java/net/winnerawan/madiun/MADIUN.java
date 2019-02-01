@@ -41,7 +41,7 @@ public class MADIUN extends Application {
         mApplicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this)).build();
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                        .setDefaultFontPath("fonts/grobold.ttf")
+                        .setDefaultFontPath("fonts/google_sans.ttf")
                         .setFontAttrId(R.attr.fontPath)
                         .build());
         mApplicationComponent.inject(this);

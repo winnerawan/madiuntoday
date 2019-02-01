@@ -17,24 +17,27 @@ import net.winnerawan.madiun.R;
 import net.winnerawan.madiun.data.network.model.Category;
 import net.winnerawan.madiun.data.network.model.Post;
 import net.winnerawan.madiun.di.component.ActivityComponent;
+import net.winnerawan.madiun.ui.adapter.NewsAdapter;
 import net.winnerawan.madiun.ui.adapter.PostAdapter;
 import net.winnerawan.madiun.ui.base.BaseFragment;
 import net.winnerawan.madiun.ui.content_news.ContentNewsFragment;
 import net.winnerawan.madiun.ui.detail.DetailActivity;
 import net.winnerawan.madiun.utils.AppConstants;
+import net.winnerawan.madiun.utils.AppLogger;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
-public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRefreshLayout.OnRefreshListener, PostAdapter.Callback {
+public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRefreshLayout.OnRefreshListener, NewsAdapter.Callback {
 
     @Inject
     DBHCHTMvpPresenter<DBHCHTView> presenter;
 
     @Inject
     LinearLayoutManager mLayoutManager;
-    @Inject
-    PostAdapter adapter;
+
+    NewsAdapter adapter;
     @BindView(R.id.content_news_srv)
     SwipeRefreshLayout refreshLayout;
     @BindView(R.id.recycler_news)
@@ -43,6 +46,8 @@ public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRef
     ShimmerFrameLayout mShimmer;
     private Category category;
 
+    private List<Post> posts;
+    private int index = 1;
     public static DBHCHTFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -64,16 +69,28 @@ public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRef
             refreshLayout.setOnRefreshListener(this);
             refreshLayout.setColorSchemeResources(R.color.colorAccent);
         }
+
+        posts = new ArrayList<>();
+        adapter = new NewsAdapter(getBaseActivity(), posts);
+        adapter.setCallback(this);
+
+        adapter.setLoadMoreListener(() -> mRecyclerNews.post(() -> {
+            index = index + 1;
+            loadMore(index);
+        }));
+
+        mRecyclerNews.setHasFixedSize(true);
+        mRecyclerNews.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
+        mRecyclerNews.setAdapter(adapter);
         return view;
     }
 
     @Override
     protected void setUp(View view) {
-        adapter.setCallback(this);
         category = new Category();
         category.setId(105);
         category.setName("DBH CHT");
-        presenter.getDbhCht(category);
+        presenter.getDbhCht(category, 1);
     }
 
     @Override
@@ -88,14 +105,19 @@ public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRef
 
     @Override
     public void onRefresh() {
-        if (category != null) presenter.getDbhCht(category);
+        if (category != null) presenter.getDbhCht(category, 1);
     }
 
     @Override
     public void showContents(List<Post> posts) {
-        mRecyclerNews.setLayoutManager(mLayoutManager);
-        adapter.addItems(posts);
-        mRecyclerNews.setAdapter(adapter);
+        if(posts.size()>0){
+            //add loaded data
+            this.posts.addAll(posts);
+        }else{//result size 0 means there is no more data available at server
+            adapter.setMoreDataAvailable(false);
+            //telling adapter to stop calling load more as no more server data available
+        }
+        adapter.notifyDataChanged();
     }
 
     @Override
@@ -123,5 +145,9 @@ public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRef
     public void stopShimmer() {
         mShimmer.stopShimmer();
         mShimmer.setVisibility(View.GONE);
+    }
+
+    private void loadMore(int page) {
+        presenter.getDbhCht(category, page);
     }
 }

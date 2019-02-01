@@ -1,6 +1,5 @@
 package net.winnerawan.madiun.ui.adapter;
 
-import android.content.SharedPreferences;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -17,18 +16,19 @@ import com.bumptech.glide.Glide;
 import net.winnerawan.madiun.R;
 import net.winnerawan.madiun.data.network.model.Post;
 import net.winnerawan.madiun.ui.base.BaseViewHolder;
-import net.winnerawan.madiun.utils.AppConstants;
 import net.winnerawan.madiun.utils.CommonUtils;
 
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
-    public static final int VIEW_TYPE_EMPTY = 0;
-    public static final int VIEW_TYPE_NORMAL = 1;
+    public static final int VIEW_TYPE_LOAD = 1;
+    public static final int VIEW_TYPE_NORMAL = 0;
 
     private Callback mCallback;
     private List<Post> mPostResponseList;
+    boolean isLoading = false, isMoreDataAvailable = true;
+    OnLoadMoreListener loadMoreListener;
 
     public PostAdapter(List<Post> postResponseList) {
         mPostResponseList = postResponseList;
@@ -50,7 +50,7 @@ public class PostAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             case VIEW_TYPE_NORMAL:
                 return new ViewHolder(
                         LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_row, parent, false));
-            case VIEW_TYPE_EMPTY:
+            case VIEW_TYPE_LOAD:
             default:
                 return new EmptyViewHolder(
                         LayoutInflater.from(parent.getContext()).inflate(R.layout.item_news_row, parent, false));
@@ -62,7 +62,7 @@ public class PostAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         if (mPostResponseList != null && mPostResponseList.size() > 0) {
             return VIEW_TYPE_NORMAL;
         } else {
-            return VIEW_TYPE_EMPTY;
+            return VIEW_TYPE_LOAD;
         }
     }
 
@@ -84,6 +84,18 @@ public class PostAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         void onPostSelected(Post app);
     }
 
+    public void setMoreDataAvailable(boolean moreDataAvailable) {
+        isMoreDataAvailable = moreDataAvailable;
+    }
+
+    public interface OnLoadMoreListener {
+        void onLoadMore();
+    }
+
+    public void setLoadMoreListener(OnLoadMoreListener loadMoreListener) {
+        this.loadMoreListener = loadMoreListener;
+    }
+
     public class ViewHolder extends BaseViewHolder {
 
         @BindView(R.id.image)
@@ -98,9 +110,6 @@ public class PostAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @BindView(R.id.category)
         TextView txtCategory;
 
-        //        @BindView(R.id.date)
-//        TextView txtDate;
-//
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -120,8 +129,8 @@ public class PostAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 }
                 Glide.with(itemView.getContext())
                         .load(post.getJetpackFeaturedMediaUrl())
-                        .asBitmap()
                         .centerCrop()
+                        .crossFade()
                         .error(R.mipmap.ic_launcher)
                         .into(imageView);
             }
@@ -157,7 +166,11 @@ public class PostAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         protected void clear() {
 
         }
+    }
 
-
+    public static class LoadHolder extends RecyclerView.ViewHolder {
+        public LoadHolder(View itemView) {
+            super(itemView);
+        }
     }
 }

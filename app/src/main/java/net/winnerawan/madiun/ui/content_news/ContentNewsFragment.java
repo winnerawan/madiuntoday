@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,18 +23,20 @@ import net.winnerawan.madiun.R;
 import net.winnerawan.madiun.data.network.model.Category;
 import net.winnerawan.madiun.data.network.model.Post;
 import net.winnerawan.madiun.di.component.ActivityComponent;
+import net.winnerawan.madiun.ui.adapter.NewsAdapter;
 import net.winnerawan.madiun.ui.adapter.PostAdapter;
 import net.winnerawan.madiun.ui.base.BaseFragment;
 import net.winnerawan.madiun.ui.detail.DetailActivity;
 import net.winnerawan.madiun.ui.webview.WebviewActivity;
 import net.winnerawan.madiun.utils.AppConstants;
+import net.winnerawan.madiun.utils.AppLogger;
 
-public class ContentNewsFragment extends BaseFragment implements ContentNewsView, SwipeRefreshLayout.OnRefreshListener, PostAdapter.Callback {
+public class ContentNewsFragment extends BaseFragment implements ContentNewsView, SwipeRefreshLayout.OnRefreshListener, NewsAdapter.Callback {
 
     @Inject
     ContentNewsMvpPresenter<ContentNewsView> presenter;
-    @Inject
-    PostAdapter adapter;
+
+    NewsAdapter adapter;
     @Inject
     LinearLayoutManager mLinearLayoutManager;
     @BindView(R.id.recycler_news)
@@ -43,7 +46,9 @@ public class ContentNewsFragment extends BaseFragment implements ContentNewsView
     @BindView(R.id.shimmer)
     ShimmerFrameLayout mShimmer;
     private Category category;
+    private List<Post> posts = new ArrayList<>();
 
+    private int index = 1;
     public ContentNewsFragment() {
         // Required empty public constructor
     }
@@ -68,6 +73,19 @@ public class ContentNewsFragment extends BaseFragment implements ContentNewsView
             refreshLayout.setOnRefreshListener(this);
             refreshLayout.setColorSchemeResources(R.color.colorAccent);
         }
+
+        adapter = new NewsAdapter(getBaseActivity(), posts);
+
+        adapter.setLoadMoreListener(() -> mRecyclerNews.post(() -> {
+            index = index + 1;
+            AppLogger.e("LOAD PAGE: "+index);
+            loadMore(index);
+        }));
+
+        mRecyclerNews.setHasFixedSize(true);
+        mRecyclerNews.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
+        mRecyclerNews.setAdapter(adapter);
+
         return view;
     }
 
@@ -80,7 +98,7 @@ public class ContentNewsFragment extends BaseFragment implements ContentNewsView
         }
         category = (Category) bundle.getSerializable(AppConstants.EXTRAS_DATA_CATEGORY);
 
-        presenter.getNews(category);
+        presenter.getNews(category, 1);
     }
 
     @Override
@@ -91,9 +109,14 @@ public class ContentNewsFragment extends BaseFragment implements ContentNewsView
 
     @Override
     public void showNews(List<Post> news) {
-        mRecyclerNews.setLayoutManager(mLinearLayoutManager);
-        adapter.addItems(news);
-        mRecyclerNews.setAdapter(adapter);
+        if(news.size()>0){
+            //add loaded data
+            posts.addAll(news);
+        }else{//result size 0 means there is no more data available at server
+            adapter.setMoreDataAvailable(false);
+            //telling adapter to stop calling load more as no more server data available
+        }
+        adapter.notifyDataChanged();
     }
 
     @Override
@@ -117,7 +140,7 @@ public class ContentNewsFragment extends BaseFragment implements ContentNewsView
 
     @Override
     public void onRefresh() {
-        if (category != null) presenter.getNews(category);
+        if (category != null) presenter.getNews(category, 1);
     }
 
     @Override
@@ -136,5 +159,9 @@ public class ContentNewsFragment extends BaseFragment implements ContentNewsView
     public void stopShimmer() {
         mShimmer.stopShimmer();
         mShimmer.setVisibility(View.GONE);
+    }
+
+    private void loadMore(int page) {
+        presenter.getNews(category, page);
     }
 }

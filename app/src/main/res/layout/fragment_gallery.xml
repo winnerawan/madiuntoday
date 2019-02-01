@@ -2,10 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                              android:layout_width="match_parent"
                                              android:layout_height="match_parent">
-    <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/content_news_srv"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+
 
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content">
             <com.facebook.shimmer.ShimmerFrameLayout
@@ -34,5 +31,4 @@
                     android:layout_height="match_parent"
                     tools:listitem="@layout/item_gallery" />
         </LinearLayout>
-    </android.support.v4.widget.SwipeRefreshLayout>
 </android.support.constraint.ConstraintLayout>

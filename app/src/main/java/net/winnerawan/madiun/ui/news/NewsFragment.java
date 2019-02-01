@@ -121,7 +121,6 @@ public class NewsFragment extends BaseFragment implements NewsView {
 
     @Override
     protected void setUp(View view) {
-        //presenter.getNews();
         newsTabPagerAdapter = new NewsTabPagerAdapter(getBaseActivity(), getChildFragmentManager());
         tabContentVp.setAdapter(newsTabPagerAdapter);
         tabNewsLayout.setDistributeEvenly(false);

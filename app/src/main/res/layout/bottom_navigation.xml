@@ -12,14 +12,14 @@
 
         <LinearLayout android:gravity="center" android:orientation="horizontal" android:layout_width="fill_parent"
                       android:layout_height="fill_parent" android:weightSum="5.0">
-            <FrameLayout android:id="@+id/f_btn_news" android:background="?selectableItemBackground"
+            <FrameLayout android:id="@+id/f_btn_news" 
                          android:clickable="true" android:layout_width="@dimen/nol_dp"
                          android:layout_height="fill_parent" android:layout_weight="1.0">
                 <ImageView android:layout_gravity="center" android:id="@+id/btn_feeds"
                            android:layout_width="@dimen/width_24dp" android:layout_height="@dimen/height_24dp"
                            android:src="@mipmap/ic_newss_on" android:scaleType="centerInside"/>
             </FrameLayout>
-            <FrameLayout android:id="@+id/f_btn_explorer" android:background="?selectableItemBackground"
+            <FrameLayout android:id="@+id/f_btn_explorer" 
                          android:clickable="true" android:layout_width="@dimen/nol_dp"
                          android:layout_height="fill_parent" android:layout_weight="1.0">
                 <ImageView android:layout_gravity="center" android:id="@+id/btn_explorer"
@@ -27,7 +27,7 @@
                            android:src="@mipmap/ic_tv_off" android:scaleType="centerInside"/>
             </FrameLayout>
 
-            <FrameLayout android:id="@+id/f_btn_gallery" android:background="?selectableItemBackground"
+            <FrameLayout android:id="@+id/f_btn_gallery" 
                          android:clickable="true" android:layout_width="@dimen/nol_dp"
                          android:layout_height="fill_parent" android:layout_weight="1.0">
                 <ImageView android:layout_gravity="center" android:id="@+id/btn_gallery" android:background="@null"
@@ -35,7 +35,7 @@
                            android:src="@mipmap/ic_gallery_off" android:scaleType="centerInside"/>
             </FrameLayout>
 
-            <FrameLayout android:id="@+id/f_btn_continue_watching" android:background="?selectableItemBackground"
+            <FrameLayout android:id="@+id/f_btn_continue_watching" 
                          android:clickable="true" android:layout_width="@dimen/nol_dp"
                          android:layout_height="fill_parent" android:layout_weight="1.0">
                 <ImageView android:layout_gravity="center" android:id="@+id/btn_continue_watching"
@@ -44,7 +44,7 @@
                            android:scaleType="centerInside"/>
             </FrameLayout>
 
-            <FrameLayout android:id="@+id/f_btn_search" android:background="?selectableItemBackground"
+            <FrameLayout android:id="@+id/f_btn_search" 
                          android:clickable="true" android:layout_width="@dimen/nol_dp"
                          android:layout_height="fill_parent" android:layout_weight="1.0">
                 <ImageView android:layout_gravity="center" android:id="@+id/btn_search" android:background="@null"
