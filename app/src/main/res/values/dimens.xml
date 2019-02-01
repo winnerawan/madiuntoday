@@ -13,5 +13,6 @@
     <dimen name="cardview_content_padding">8dp</dimen>
     <dimen name="activity_margin_horizontal">16dp</dimen>
     <dimen name="dimen_comment_newsfeed">56dp</dimen>
+    <dimen name="height_img_contents">206dp</dimen>
 
 </resources>

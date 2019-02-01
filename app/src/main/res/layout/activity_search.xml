@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_activity_search"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#edf1f4">
+
+        <RelativeLayout
+            android:elevation="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff">
+
+            <include
+                android:id="@+id/search_bar"
+                layout="@layout/search_toolbar"/>
+        </RelativeLayout>
+
+        <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/searchKeywords"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="#ffffff"-->
+        <!--android:orientation="vertical" />-->
+
+        <LinearLayout
+            android:id="@+id/searchContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--tabs resto and menu-->
+            <!--<android.support.design.widget.TabLayout-->
+                <!--android:id="@+id/tabsSearchResult"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="?android:attr/actionBarSize"-->
+                <!--android:layout_gravity="bottom"-->
+                <!--android:layout_marginBottom="1dp"-->
+                <!--android:background="#ffffff"-->
+                <!--android:paddingLeft="16dp" />-->
+
+            <!--<android.support.v4.view.ViewPager-->
+                <!--android:id="@+id/pagerSearchResult"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:paddingTop="16dp" />-->
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_news"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <!--<ViewStub-->
+        <!--android:id="@+id/layoutErrorStub"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout="@if/food_layout_error"-->
+        <!--android:visibility="gone" />-->
+
+        <!--<ViewStub-->
+        <!--android:id="@+id/layoutSearchNoResultStub"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout="@if/food_layout_search_no_results_found"-->
+        <!--android:visibility="gone" />-->
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+</RelativeLayout>

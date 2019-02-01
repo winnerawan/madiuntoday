@@ -3,7 +3,10 @@ package net.winnerawan.madiun.ui.splash;
 import javax.inject.Inject;
 
 import com.androidnetworking.error.ANError;
+import net.winnerawan.madiun.data.network.Ads;
+import net.winnerawan.madiun.data.network.App;
 import net.winnerawan.madiun.ui.base.BasePresenter;
+import net.winnerawan.madiun.utils.AppLogger;
 import net.winnerawan.madiun.utils.rx.SchedulerProvider;
 import io.reactivex.disposables.CompositeDisposable;
 import net.winnerawan.madiun.data.DataManager;
@@ -29,8 +32,11 @@ public class SplashPresenter<V extends SplashView> extends BasePresenter<V> impl
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(app -> {
                     if (app!=null) {
-                        getDataManager().setBanner(app.getBanner());
-                        getDataManager().setInters(app.getInter());
+                        getDataManager().setYoutubeKey(app.getYoutubeKey());
+                        getDataManager().setAdEnable(app.isAdsEnable());
+                        getDataManager().setBanner(app.getAds().getBanner());
+                        getDataManager().setInters(app.getAds().getInter());
+                        AppLogger.e("ADS: "+app.getAds().getInter());
                     }
 
                 }, throwable -> {

@@ -86,7 +86,7 @@ dependencies {
     implementation "com.android.support:design:$rootProject.supportLibraryVersion"
     implementation "com.android.support:support-vector-drawable:$rootProject.supportLibraryVersion"
     implementation 'org.sufficientlysecure:html-textview:3.5'
-
+    implementation 'org.greenrobot:eventbus:3.0.0'
     // font
     implementation "uk.co.chrisjenx:calligraphy:$rootProject.calligraphyVersion"
 
@@ -150,6 +150,9 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.codesgood:justifiedtextview:1.1.0'
     implementation 'com.romandanylyk:pageindicatorview:1.0.2'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
+    implementation 'com.google.android.gms:play-services-places:16.0.0'
+
 }
 
 configurations.all {

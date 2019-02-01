@@ -8,11 +8,10 @@ import javax.inject.Singleton;
 import net.winnerawan.madiun.data.db.DbHelper;
 import net.winnerawan.madiun.data.network.Ads;
 import net.winnerawan.madiun.data.network.ApiHelper;
-import net.winnerawan.madiun.data.network.model.Categories;
-import net.winnerawan.madiun.data.network.model.Category;
-import net.winnerawan.madiun.data.network.model.Gallery;
-import net.winnerawan.madiun.data.network.model.Post;
+import net.winnerawan.madiun.data.network.App;
+import net.winnerawan.madiun.data.network.model.*;
 import net.winnerawan.madiun.data.network.response.GalleryResponse;
+import net.winnerawan.madiun.data.network.response.YoutubeResponse;
 import net.winnerawan.madiun.data.prefs.PreferencesHelper;
 import net.winnerawan.madiun.di.ApplicationContext;
 
@@ -106,13 +105,33 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<Ads> getAds() {
+    public Single<App> getAds() {
         return mApiHelper.getAds();
     }
 
     @Override
     public Single<List<Category>> getCategories() {
         return mApiHelper.getCategories();
+    }
+
+    @Override
+    public boolean isAdEnable() {
+        return mPreferencesHelper.isAdEnable();
+    }
+
+    @Override
+    public void setAdEnable(boolean isEnable) {
+        mPreferencesHelper.isAdEnable();
+    }
+
+    @Override
+    public void setYoutubeKey(String youtubeKey) {
+        mPreferencesHelper.setYoutubeKey(youtubeKey);
+    }
+
+    @Override
+    public String getYoutubeKey() {
+        return mPreferencesHelper.getYoutubeKey();
     }
 
     @Override
@@ -136,6 +155,21 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void clearCategoriesOtherFromPref() {
+        mPreferencesHelper.clearCategoriesOtherFromPref();
+    }
+
+    @Override
+    public void setCategoriesOther(Categories categories) {
+        mPreferencesHelper.setCategoriesOther(categories);
+    }
+
+    @Override
+    public Categories getCategoriesOtherFromPref() {
+        return mPreferencesHelper.getCategoriesOtherFromPref();
+    }
+
+    @Override
     public Single<List<Post>> getNews(Category category) {
         return mApiHelper.getNews(category);
     }
@@ -148,6 +182,21 @@ public class AppDataManager implements DataManager {
     @Override
     public Single<List<Gallery>> getGalleries(Category category) {
         return mApiHelper.getGalleries(category);
+    }
+
+    @Override
+    public Single<Article> getArticle(String url) {
+        return mApiHelper.getArticle(url);
+    }
+
+    @Override
+    public Single<List<Post>> search(String keyword) {
+        return mApiHelper.search(keyword);
+    }
+
+    @Override
+    public Single<YoutubeResponse> getVideos(String key) {
+        return mApiHelper.getVideos(key);
     }
 }
 

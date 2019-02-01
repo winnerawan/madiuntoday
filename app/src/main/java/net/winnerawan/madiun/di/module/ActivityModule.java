@@ -11,6 +11,7 @@ import net.winnerawan.madiun.ui.about.AboutPresenter;
 import net.winnerawan.madiun.ui.about.AboutView;
 import net.winnerawan.madiun.ui.adapter.HeadLineAdapter;
 import net.winnerawan.madiun.ui.adapter.PostAdapter;
+import net.winnerawan.madiun.ui.category.*;
 import net.winnerawan.madiun.ui.content_news.ContentNewsMvpPresenter;
 import net.winnerawan.madiun.ui.content_news.ContentNewsPresenter;
 import net.winnerawan.madiun.ui.content_news.ContentNewsView;
@@ -33,11 +34,15 @@ import net.winnerawan.madiun.di.ActivityContext;
 import net.winnerawan.madiun.ui.news.NewsMvpPresenter;
 import net.winnerawan.madiun.ui.news.NewsPresenter;
 import net.winnerawan.madiun.ui.news.NewsView;
+import net.winnerawan.madiun.ui.search.SearchMvpPresenter;
+import net.winnerawan.madiun.ui.search.SearchPresenter;
+import net.winnerawan.madiun.ui.search.SearchView;
 import net.winnerawan.madiun.ui.splash.SplashMvpPresenter;
 import net.winnerawan.madiun.ui.splash.SplashView;
 import net.winnerawan.madiun.ui.tv.TvMvpPresenter;
 import net.winnerawan.madiun.ui.tv.TvPresenter;
 import net.winnerawan.madiun.ui.tv.TvView;
+import net.winnerawan.madiun.ui.tv.VideosAdapter;
 import net.winnerawan.madiun.ui.webview.WebviewMvpPresenter;
 import net.winnerawan.madiun.ui.webview.WebviewPresenter;
 import net.winnerawan.madiun.ui.webview.WebviewView;
@@ -122,6 +127,19 @@ public class ActivityModule {
         return presenter;
     }
 
+    @Provides
+    @PerActivity
+    CategoryMvpPresenter<CategoryView> provideCategoryPresenter(
+            CategoryPresenter<CategoryView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    @PerActivity
+    SearchMvpPresenter<SearchView> provideSearchPresenter(
+            SearchPresenter<SearchView> presenter) {
+        return presenter;
+    }
 
     @Provides
     AdRequest provideAdRequest() {
@@ -181,6 +199,21 @@ public class ActivityModule {
     @Provides
     HeadLineAdapter provideHeadlinesAdapter() {
         return new HeadLineAdapter(new ArrayList<>());
+    }
+
+    @Provides
+    VideosAdapter provideVideosAdapter() {
+        return new VideosAdapter(new ArrayList<>());
+    }
+
+    @Provides
+    CategoryOtherAdapter provideCategoryOtherAdapter() {
+        return new CategoryOtherAdapter(new ArrayList<>());
+    }
+
+    @Provides
+    CategoryAdapter provideCategoryAdapter() {
+        return new CategoryAdapter(new ArrayList<>());
     }
 
 //    @Provides

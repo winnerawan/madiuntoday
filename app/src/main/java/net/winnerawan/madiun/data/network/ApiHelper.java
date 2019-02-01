@@ -1,10 +1,12 @@
 package net.winnerawan.madiun.data.network;
 
 import io.reactivex.Single;
+import net.winnerawan.madiun.data.network.model.Article;
 import net.winnerawan.madiun.data.network.model.Category;
 import net.winnerawan.madiun.data.network.model.Gallery;
 import net.winnerawan.madiun.data.network.model.Post;
 import net.winnerawan.madiun.data.network.response.GalleryResponse;
+import net.winnerawan.madiun.data.network.response.YoutubeResponse;
 
 import java.util.List;
 
@@ -17,7 +19,7 @@ import java.util.List;
 
 public interface ApiHelper {
 
-    Single<Ads> getAds();
+    Single<App> getAds();
 
     Single<List<Category>> getCategories();
 
@@ -29,4 +31,9 @@ public interface ApiHelper {
 
     Single<GalleryResponse> fetchGallery(String url);
 
+    Single<Article> getArticle(String url);
+
+    Single<List<Post>> search(String keyword);
+
+    Single<YoutubeResponse> getVideos(String key);
 }

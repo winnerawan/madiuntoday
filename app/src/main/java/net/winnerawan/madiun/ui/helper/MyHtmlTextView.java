@@ -14,11 +14,6 @@ import android.view.View;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 import org.sufficientlysecure.htmltextview.LocalLinkMovementMethod;
 
-/**
- * Created by adriyo on 11/24/17.
- * adriyo.github.io
- */
-
 public class MyHtmlTextView extends HtmlTextView {
     public MyHtmlTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

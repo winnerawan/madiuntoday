@@ -14,6 +14,15 @@ public interface PreferencesHelper {
     boolean isLoggedIn();
     void setLoggedIn(boolean loggedIn);
 
+    boolean isAdEnable();
+    void setAdEnable(boolean isEnable);
+    void clearCategoriesOtherFromPref();
+    Categories getCategoriesOtherFromPref();
+    void setCategoriesOther(Categories categories);
+
+    void setYoutubeKey(String youtubeKey);
+    String getYoutubeKey();
+
     boolean isFirstTime();
     void setFirstTime(boolean isFirstTime);
     void setCategories(Categories categories);

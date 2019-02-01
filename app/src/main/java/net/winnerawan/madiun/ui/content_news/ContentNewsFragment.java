@@ -101,6 +101,7 @@ public class ContentNewsFragment extends BaseFragment implements ContentNewsView
         Intent intent = new Intent(getBaseActivity(), DetailActivity.class);
         intent.putExtra("post", post);
         intent.putExtra("url", post.getLink());
+        intent.putExtra("image", post.getJetpackFeaturedMediaUrl());
         startActivity(intent);
     }
 

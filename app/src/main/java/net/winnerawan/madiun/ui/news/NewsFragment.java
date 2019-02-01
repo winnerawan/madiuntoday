@@ -1,5 +1,7 @@
 package net.winnerawan.madiun.ui.news;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.OnClick;
 import net.winnerawan.madiun.R;
+import net.winnerawan.madiun.data.TabEvents;
 import net.winnerawan.madiun.data.network.model.Category;
 import net.winnerawan.madiun.data.network.model.Post;
 import net.winnerawan.madiun.di.component.ActivityComponent;
@@ -25,8 +29,13 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import net.winnerawan.madiun.ui.category.CategoryActivity;
 import net.winnerawan.madiun.ui.content_news.ContentNewsFragment;
 import net.winnerawan.madiun.ui.helper.SlidingTabLayout;
+import net.winnerawan.madiun.utils.AppConstants;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class NewsFragment extends BaseFragment implements NewsView {
 
@@ -75,11 +84,40 @@ public class NewsFragment extends BaseFragment implements NewsView {
             component.inject(this);
             setUnBinder(ButterKnife.bind(this, view));
             presenter.onAttach(this);
+            if (!EventBus.getDefault().isRegistered(this)) {
+                EventBus.getDefault().register(this);
+            }
         }
 
         return view;
     }
 
+    @OnClick(R.id.add_category_btn)
+    void onAddCategoryTabClick() {
+        if (isCategoryEnabled) {
+            Intent intent = new Intent(getBaseActivity(), CategoryActivity.class);
+            intent.putExtra(AppConstants.EXTRAS_TAB_POSITION, tabPosition);
+            startActivityForResult(intent, AppConstants.INTENT_CATEGORY);
+        }
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == AppConstants.INTENT_CATEGORY) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data == null) {
+                    return;
+                }
+
+                int position = data.getIntExtra(AppConstants.EXTRAS_TAB_POSITION, 0);
+                int currPosition = (position - 1) > 0 ? (position - 1) : 0;
+                tabContentVp.setCurrentItem(currPosition);
+            }
+            presenter.refreshTab();
+        }
+    }
 
     @Override
     protected void setUp(View view) {
@@ -164,6 +202,26 @@ public class NewsFragment extends BaseFragment implements NewsView {
         tabContentVp.setOffscreenPageLimit(0);*/
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (!EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().register(this);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (EventBus.getDefault().isRegistered(this)) {
+            EventBus.getDefault().unregister(this);
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onTabEvent(TabEvents event) {
+//        presenter.refreshTabs();
+    }
 
 //    @Override
 //    public void showHeadLines(List<Post> headlines) {

@@ -1,5 +1,6 @@
 package net.winnerawan.madiun.ui.dbhcht;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -19,12 +20,13 @@ import net.winnerawan.madiun.di.component.ActivityComponent;
 import net.winnerawan.madiun.ui.adapter.PostAdapter;
 import net.winnerawan.madiun.ui.base.BaseFragment;
 import net.winnerawan.madiun.ui.content_news.ContentNewsFragment;
+import net.winnerawan.madiun.ui.detail.DetailActivity;
 import net.winnerawan.madiun.utils.AppConstants;
 
 import javax.inject.Inject;
 import java.util.List;
 
-public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRefreshLayout.OnRefreshListener {
+public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRefreshLayout.OnRefreshListener, PostAdapter.Callback {
 
     @Inject
     DBHCHTMvpPresenter<DBHCHTView> presenter;
@@ -67,6 +69,7 @@ public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRef
 
     @Override
     protected void setUp(View view) {
+        adapter.setCallback(this);
         category = new Category();
         category.setId(105);
         category.setName("DBH CHT");
@@ -93,6 +96,15 @@ public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRef
         mRecyclerNews.setLayoutManager(mLayoutManager);
         adapter.addItems(posts);
         mRecyclerNews.setAdapter(adapter);
+    }
+
+    @Override
+    public void onPostSelected(Post post) {
+        Intent intent = new Intent(getBaseActivity(), DetailActivity.class);
+        intent.putExtra("post", post);
+        intent.putExtra("url", post.getLink());
+        intent.putExtra("image", post.getJetpackFeaturedMediaUrl());
+        startActivity(intent);
     }
 
     @Override

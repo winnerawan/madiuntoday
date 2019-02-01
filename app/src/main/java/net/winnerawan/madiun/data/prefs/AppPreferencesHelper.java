@@ -30,11 +30,14 @@ public class AppPreferencesHelper implements PreferencesHelper {
     private static final String KEY_CLIENT_SECRET = "KEY_CLIENT_SECRET";
     private static final String KEY_CONTENT_TYPE = "KEY_CONTENT_TYPE";
     private static final String KEY_FIRST_TIME = "KEY_FIRST_TIME";
-    private static final String KEY_CATEGORY = "KEY_CATEGORY";
+    private static final String KEY_CATEGORIES = "KEY_CATEGORIES";
+    private static final String KEY_CATEGORIES_OTHER = "KEY_CATEGORIES_OTHER";
 
     private static final String KEY_REWARD = "KEY_REWARD";
     private static final String KEY_BANNER = "KEY_BANNER";
     private static final String KEY_INTERS = "KEY_INTERS";
+    private static final String KEY_YOUTUBE_KEY = "KEY_YOUTUBE_KEY";
+    private static final String KEY_ADS_ENABLE = "KEY_ADS_ENABLE";
 
 
     private final SharedPreferences mPrefs;
@@ -102,18 +105,18 @@ public class AppPreferencesHelper implements PreferencesHelper {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
         String json = gson.toJson(categories);
         SharedPreferences.Editor editor = mPrefs.edit();
-        editor.putString(KEY_CATEGORY, json);
+        editor.putString(KEY_CATEGORIES, json);
         editor.apply();
     }
 
     @Override
     public void clearCategoriesFromPref() {
-        mPrefs.edit().putString(KEY_CATEGORY, "").apply();
+        mPrefs.edit().putString(KEY_CATEGORIES, "").apply();
     }
 
     @Override
     public Categories getCategoriesFromPref() {
-        String json = mPrefs.getString(KEY_CATEGORY, "");
+        String json = mPrefs.getString(KEY_CATEGORIES, "");
         Categories categories = new Categories();
         if (!json.isEmpty()) {
             JsonParser parser = new JsonParser();
@@ -123,5 +126,53 @@ public class AppPreferencesHelper implements PreferencesHelper {
             }.getType());
         }
         return categories;
+    }
+
+    @Override
+    public void clearCategoriesOtherFromPref() {
+        mPrefs.edit().putString(KEY_CATEGORIES_OTHER, "").apply();
+    }
+
+    @Override
+    public void setCategoriesOther(Categories categories) {
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+        String json = gson.toJson(categories);
+        SharedPreferences.Editor editor = mPrefs.edit();
+        editor.putString(KEY_CATEGORIES_OTHER, json);
+        editor.apply();
+    }
+
+    @Override
+    public Categories getCategoriesOtherFromPref() {
+        String json = mPrefs.getString(KEY_CATEGORIES_OTHER, "");
+        Categories categories = new Categories();
+        if (!json.isEmpty()) {
+            JsonParser parser = new JsonParser();
+            JsonObject data = (JsonObject) parser.parse(json);
+            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+            categories = gson.fromJson(data, new TypeToken<Categories>() {
+            }.getType());
+        }
+        return categories;
+    }
+
+    @Override
+    public boolean isAdEnable() {
+        return mPrefs.getBoolean(KEY_ADS_ENABLE, false);
+    }
+
+    @Override
+    public void setAdEnable(boolean isEnable) {
+        mPrefs.edit().putBoolean(KEY_ADS_ENABLE, isEnable).apply();
+    }
+
+    @Override
+    public void setYoutubeKey(String youtubeKey) {
+        mPrefs.edit().putString(KEY_YOUTUBE_KEY, youtubeKey).apply();
+    }
+
+    @Override
+    public String getYoutubeKey() {
+        return mPrefs.getString(KEY_YOUTUBE_KEY, "AIzaSyD9EIJdbEje-bFsRKWZDtnYCjP6Ks_9VXk");
     }
 }

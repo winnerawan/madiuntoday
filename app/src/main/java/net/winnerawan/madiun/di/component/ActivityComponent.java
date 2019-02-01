@@ -1,11 +1,14 @@
 package net.winnerawan.madiun.di.component;
 
+import net.winnerawan.madiun.ui.about.AboutFragment;
+import net.winnerawan.madiun.ui.category.CategoryActivity;
 import net.winnerawan.madiun.ui.content_news.ContentNewsFragment;
 import net.winnerawan.madiun.ui.dbhcht.DBHCHTFragment;
 import net.winnerawan.madiun.ui.detail.DetailActivity;
 import net.winnerawan.madiun.ui.gallery.GalleryFragment;
 import net.winnerawan.madiun.ui.main.MainActivity;
 import net.winnerawan.madiun.ui.news.NewsFragment;
+import net.winnerawan.madiun.ui.search.SearchActivity;
 import net.winnerawan.madiun.ui.splash.SplashActivity;
 import dagger.Component;
 import net.winnerawan.madiun.di.PerActivity;
@@ -41,4 +44,10 @@ public interface ActivityComponent {
     void inject(DBHCHTFragment dbhchtFragment);
 
     void inject(GalleryFragment galleryFragment);
+
+    void inject(AboutFragment aboutFragment);
+
+    void inject(SearchActivity searchActivity);
+
+    void inject(CategoryActivity categoryActivity);
 }

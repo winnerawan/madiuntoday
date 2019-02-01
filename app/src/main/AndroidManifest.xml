@@ -9,6 +9,12 @@
                  android:supportsRtl="true"
                  android:theme="@style/AppTheme">
         <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="@string/google_maps_key"/>
+        <meta-data
+                android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version"/>
+        <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
                 android:value="@string/appid"/>
         <activity android:name="net.winnerawan.madiun.ui.splash.SplashActivity"
@@ -21,6 +27,8 @@
         <activity android:name="net.winnerawan.madiun.ui.main.MainActivity"/>
         <activity android:name="net.winnerawan.madiun.ui.detail.DetailActivity"/>
         <activity android:name=".ui.webview.WebviewActivity"/>
+        <activity android:name=".ui.search.SearchActivity"/>
+        <activity android:name=".ui.category.CategoryActivity"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="bff4848b3ed3df68b8971fa1cb1fab790ba7cccc" />

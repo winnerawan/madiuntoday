@@ -39,6 +39,8 @@ public final class AppConstants {
     public static final int CATEGORY_DBH_CHT = 105;
     public static final String SLUG_MTDTV = "mtdtv";
     public static final String NAME_MTDTV = "MadiunTodayTV";
+    public static final String EXTRAS_TAB_POSITION = "position_tab";
+    public static final int INTENT_CATEGORY = 1001;
 
 
     private AppConstants() {

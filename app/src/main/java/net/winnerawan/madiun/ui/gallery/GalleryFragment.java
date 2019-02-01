@@ -49,7 +49,7 @@ public class GalleryFragment extends BaseFragment implements GalleryView, SwipeR
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_content_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_gallery, container, false);
         ActivityComponent component = getActivityComponent();
         if (component != null) {
             component.inject(this);
@@ -71,9 +71,14 @@ public class GalleryFragment extends BaseFragment implements GalleryView, SwipeR
 
     @Override
     public void showGalleries(List<Gallery> galleries) {
-        mRecyclerNews.setLayoutManager(mLayoutManager);
+        mRecyclerNews.setLayoutManager(new LinearLayoutManager(getBaseActivity()));
         adapter = new GalleryAdapter(getBaseActivity(), galleries);
         mRecyclerNews.setAdapter(adapter);
+    }
+
+    @Override
+    public void setDisableRefreshLayout() {
+        if (refreshLayout.isRefreshing()) refreshLayout.setRefreshing(false);
     }
 
     @Override

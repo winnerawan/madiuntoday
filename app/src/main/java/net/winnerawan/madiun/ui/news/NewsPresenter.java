@@ -2,12 +2,14 @@ package net.winnerawan.madiun.ui.news;
 
 import com.androidnetworking.error.ANError;
 
+import com.google.gson.Gson;
 import net.winnerawan.madiun.data.DataManager;
 import net.winnerawan.madiun.data.network.model.Categories;
 import net.winnerawan.madiun.data.network.model.Category;
 import net.winnerawan.madiun.data.network.model.Post;
 import net.winnerawan.madiun.ui.base.BasePresenter;
 import net.winnerawan.madiun.utils.AppConstants;
+import net.winnerawan.madiun.utils.AppLogger;
 import net.winnerawan.madiun.utils.rx.SchedulerProvider;
 
 import java.util.Iterator;
@@ -30,18 +32,23 @@ public class NewsPresenter<V extends NewsView> extends BasePresenter<V> implemen
     public void getCategories() {
 
         List<Category> categories = getDataManager().getCategoriesFromPref().getCategories();
-        if (categories != null && categories.size() > 0 && categories.get(0) != null && !categories.get(0).getName().isEmpty()) {
-//            getMvpView().setTabs(categories);
-//            if (categories.get(0).getName().equalsIgnoreCase("MadiunTodayTV")) {
-//                categories.remove(0);
-//            }
+
+        if (categories != null) {
+            getMvpView().setTabs(categories);
+            if (categories.get(0).getName().equalsIgnoreCase("KATEGORI")) {
+                categories.remove(0);
+            }
+            AppLogger.e("kategori dr preference 1 asli: "+new Gson().toJson(categories));
 
             for (int i = 0; i < categories.size(); i++) {
+//                categories.remove(0);
 //                Category dbhcht = categories.get(i).getId().equals(105);
 //                Category
 //                if (categories.get(i).getId().equals(29) && categories.get(i).getId().equals(8) && ) {
 //                    categories.re
 //                }
+                AppLogger.e("kategori dr preference 1: "+new Gson().toJson(categories));
+
                 Category category = categories.get(i);
                 if (category.getId().equals(AppConstants.CATEGORY_MADIUN_THIS_WEEK) || category.getParent().equals(AppConstants.CATEGORY_TV)) {
                     categories.remove(category);
@@ -81,12 +88,36 @@ public class NewsPresenter<V extends NewsView> extends BasePresenter<V> implemen
                                     checkViewAttached();
 
                                     List<Category> currCategories = categoriesResponse;
+                                    AppLogger.e("kategori asli : "+new Gson().toJson(currCategories));
+
+                                    for (int i=0; i<currCategories.size(); i++) {
+                                        Category category = currCategories.get(i);
+                                        if (category.getId().equals(AppConstants.CATEGORY_MADIUN_THIS_WEEK) || category.getParent().equals(AppConstants.CATEGORY_TV)) {
+                                            currCategories.remove(category);
+                                        }
+                                        if (category.getName().equalsIgnoreCase(AppConstants.NAME_MTDTV) || category.getSlug().equalsIgnoreCase(AppConstants.SLUG_MTDTV)) {
+                                            currCategories.remove(category);
+                                        }
+                                        if (category.getId().equals(AppConstants.CATEGORY_DBH_CHT)) {
+                                            currCategories.remove(category);
+                                        }
+                                        if (category.getId().equals(AppConstants.CATEGORY_FOTO_BERITA)) {
+                                            currCategories.remove(category);
+                                        }
+                                        if (category.getId().equals(AppConstants.CATEGORY_MADIUN_THIS_WEEK)) {
+                                            currCategories.remove(category);
+                                        }
+                                        if (category.getId().equals(AppConstants.CATEGORY_TV)) {
+                                            currCategories.remove(category);
+                                        }
+
+                                    }
 //                                    Category rekomendasi = new Category();
 //                                    rekomendasi.setId("rekomendasi");
 //                                    rekomendasi.setName("Rekomendasi");
 //                                    currCategories.add(0, rekomendasi);
 //                                    getDataManager().setCategories(new Categories(currCategories));
-                                    getDataManager().setCategories(new Categories(categoriesResponse));
+                                    getDataManager().setCategories(new Categories(currCategories));
                             /*getMvpView().showMessage("Proses Input : ");
                             Log.d("TES", "SABAR" : "+getDataManager().getCategoriesFromPref().size());
                             getMvpView().onError("Proses Input : "+new Gson().toJson(getDataManager().getCategoriesFromPref()));
@@ -112,27 +143,10 @@ public class NewsPresenter<V extends NewsView> extends BasePresenter<V> implemen
                             Log.d("TES", "NULL COK ");*/
 //                            for (int i = 0; i < categoriesResponse.getCategories().size(); i++) {
                                     List<Category> categories2 = getDataManager().getCategoriesFromPref().getCategories();
+                                    AppLogger.e("kategori dr preference 2: "+new Gson().toJson(categories2));
+
 //                                    getMvpView().setTabs(categories2);
                                     for (int i = 0; i < categories2.size(); i++) {
-                                        Category category = categories2.get(i);
-                                        if (category.getId().equals(AppConstants.CATEGORY_MADIUN_THIS_WEEK) || category.getParent().equals(AppConstants.CATEGORY_TV)) {
-                                            categories2.remove(category);
-                                        }
-                                        if (category.getName().equalsIgnoreCase(AppConstants.NAME_MTDTV) || category.getSlug().equalsIgnoreCase(AppConstants.SLUG_MTDTV)) {
-                                            categories2.remove(category);
-                                        }
-                                        if (category.getId().equals(AppConstants.CATEGORY_DBH_CHT)) {
-                                            categories2.remove(category);
-                                        }
-                                        if (category.getId().equals(AppConstants.CATEGORY_FOTO_BERITA)) {
-                                            categories2.remove(category);
-                                        }
-                                        if (category.getId().equals(AppConstants.CATEGORY_MADIUN_THIS_WEEK)) {
-                                            categories2.remove(category);
-                                        }
-                                        if (category.getId().equals(AppConstants.CATEGORY_TV)) {
-                                            categories2.remove(category);
-                                        }
 
                                           getMvpView().addTab(categories2.get(i));
                                     }
@@ -152,5 +166,24 @@ public class NewsPresenter<V extends NewsView> extends BasePresenter<V> implemen
                                 }
                         )
         );
+    }
+
+    @Override
+    public void refreshTab() {
+        getMvpView().showLoading();
+        getMvpView().clearTabs();
+        List<Category> categories = getDataManager().getCategoriesFromPref().getCategories();
+        if (categories != null) {
+            categories.remove(0);
+            if (categories.get(0).getName().equalsIgnoreCase("KATEGORI")) {
+                categories.remove(0);
+            }
+            for (int i = 0; i < categories.size(); i++) {
+                getMvpView().addTab(categories.get(i));
+            }
+            getMvpView().setEnabledMenuCategory(true);
+            getMvpView().setOffScreenPageLimit(categories.size());
+        }
+        getMvpView().hideLoading();
     }
 }

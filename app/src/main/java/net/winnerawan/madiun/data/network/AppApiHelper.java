@@ -3,10 +3,12 @@ package net.winnerawan.madiun.data.network;
 
 import com.rx2androidnetworking.Rx2AndroidNetworking;
 import io.reactivex.Single;
+import net.winnerawan.madiun.data.network.model.Article;
 import net.winnerawan.madiun.data.network.model.Category;
 import net.winnerawan.madiun.data.network.model.Gallery;
 import net.winnerawan.madiun.data.network.model.Post;
 import net.winnerawan.madiun.data.network.response.GalleryResponse;
+import net.winnerawan.madiun.data.network.response.YoutubeResponse;
 
 import java.util.List;
 
@@ -30,11 +32,11 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Single<Ads> getAds() {
+    public Single<App> getAds() {
         return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_APP)
                 .doNotCacheResponse()
                 .build()
-                .getObjectSingle(Ads.class);
+                .getObjectSingle(App.class);
     }
 
     @Override
@@ -73,5 +75,33 @@ public class AppApiHelper implements ApiHelper {
                 .addQueryParameter("categories", String.valueOf(category.getId()))
                 .build()
                 .getObjectListSingle(Gallery.class);
+    }
+
+    @Override
+    public Single<Article> getArticle(String url) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_ARTICLE)
+                .addQueryParameter("link", url)
+                .build()
+                .getObjectSingle(Article.class);
+    }
+
+    @Override
+    public Single<List<Post>> search(String keyword) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_POST)
+                .addQueryParameter("search", keyword)
+                .build()
+                .getObjectListSingle(Post.class);
+    }
+
+    @Override
+    public Single<YoutubeResponse> getVideos(String key) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_YOUTUBE)
+                .addQueryParameter("key", key)
+                .addQueryParameter("channelId", "UCVzwFHg3cxZ4I6N7XWYu_Pw")
+                .addQueryParameter("part", "snippet,id")
+                .addQueryParameter("order", "date")
+                .addQueryParameter("maxResults", "50")
+                .build()
+                .getObjectSingle(YoutubeResponse.class);
     }
 }

@@ -30,7 +30,7 @@ public class GalleryPresenter<V extends GalleryView> extends BasePresenter<V> im
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(galleries -> {
-                    if (galleries!=null) {
+                    if (galleries != null) {
                         reGenerateGalleries(galleries);
                     }
                 }, throwable -> {
@@ -48,19 +48,34 @@ public class GalleryPresenter<V extends GalleryView> extends BasePresenter<V> im
     }
 
     private void reGenerateGalleries(List<Gallery> galleries) {
-        for (Gallery gallery: galleries) {
+        for (Gallery gallery : galleries) {
             getCompositeDisposable().add(getDataManager().fetchGallery(gallery.getLink())
                     .observeOn(getSchedulerProvider().ui())
                     .subscribeOn(getSchedulerProvider().io())
                     .subscribe(galleryResponse -> {
-                        if (galleryResponse!=null) {
-                            gallery.setDescription(galleryResponse.getDescription());
-                            gallery.setImages(galleryResponse.getImages());
-                            getMvpView().showGalleries(galleries);
-                            getMvpView().stopShimmer();
-                        }
-                    }, throwable -> {
+                        if (!isViewAttached()) return;
+                        getMvpView().setDisableRefreshLayout();
 
+                        if (galleryResponse == null) {
+                            return;
+                        }
+
+                        gallery.setDescription(galleryResponse.getDescription());
+                        gallery.setImages(galleryResponse.getImages());
+                        getMvpView().showGalleries(galleries);
+                        getMvpView().stopShimmer();
+
+                    }, throwable -> {
+                        if (!isViewAttached()) {
+                            return;
+                        }
+
+                        getMvpView().hideLoading();
+
+                        if (throwable instanceof ANError) {
+                            ANError anError = (ANError) throwable;
+                            handleApiError(anError);
+                        }
                     }));
         }
     }

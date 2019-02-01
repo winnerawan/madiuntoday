@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2018 Winnerawan T
+  ~ Unauthorized copying of this file, via any medium is strictly
+  ~ prohibited Proprietary and confidential
+  ~ Written by Winnerawan T <winnerawan@gmail.com>, March 2018
+  -->
+
+<android.support.v7.widget.CardView
+    app:cardElevation="3dp"
+    android:layout_height="?android:attr/actionBarSize"
+    android:layout_width="match_parent"
+    android:tag="layout/food_layout_new_search_toolbar_0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/of_bg_edittext"
+        android:layout_width="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_height="35dp"
+            android:layout_width="35dp"
+            android:scaleType="center"
+            android:src="@drawable/ic_action_food_ic_back_grey" />
+
+        <EditText
+            android:background="@null"
+            android:hint="@string/search_hint"
+            android:id="@+id/input_search"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:maxLines="1"
+            android:paddingLeft="24dp"
+            android:paddingRight="16dp"
+            android:textColor="#707070"
+            android:textColorHint="#707070"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/img_clear_search"
+            android:layout_height="35dp"
+            android:layout_width="35dp"
+            android:scaleType="center"
+            android:tint="@color/dark_gray"
+            android:src="@android:drawable/ic_menu_close_clear_cancel" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

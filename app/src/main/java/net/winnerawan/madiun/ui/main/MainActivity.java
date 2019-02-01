@@ -1,5 +1,6 @@
 package net.winnerawan.madiun.ui.main;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.google.android.gms.ads.InterstitialAd;
 import net.winnerawan.madiun.ui.dbhcht.DBHCHTFragment;
 import net.winnerawan.madiun.ui.gallery.GalleryFragment;
 import net.winnerawan.madiun.ui.news.NewsFragment;
+import net.winnerawan.madiun.ui.search.SearchActivity;
 import net.winnerawan.madiun.ui.tv.TvFragment;
 import net.winnerawan.madiun.utils.ViewUtils;
 
@@ -82,7 +84,7 @@ public class MainActivity extends BaseActivity implements MainView, BottomNaviga
                 break;
             case R.id.action_tv :
                 fragment = TvFragment.newInstance();
-                setToolbarElevation(0F);
+                setToolbarElevation(3F);
                 break;
             case R.id.action_gallery :
                 fragment = GalleryFragment.newInstance();
@@ -120,5 +122,14 @@ public class MainActivity extends BaseActivity implements MainView, BottomNaviga
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search: startActivity(new Intent(this, SearchActivity.class));
+            break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -10,4 +10,7 @@ public interface GalleryView extends MvpView {
     void stopShimmer();
 
     void showGalleries(List<Gallery> galleries);
+
+    void setDisableRefreshLayout();
+
 }
