@@ -6,7 +6,7 @@
 [<img src="./art/art.jpg">](./art/art.jpg)
 
 [![COPYRIGHT](https://img.shields.io/badge/LICENSE%20-MIT-green.svg)](./license.md) <br />
- TIDAK TERKECUALI SEMUA ORANG YANG BERKTP DIMANDIUN. REPO INI DI SHARE (MIT LICENSE) HANYA UNTUK PENGGUNA GITHUB DARI LUAR INDONESIA.
+ TERKECUALI SEMUA ORANG YANG BER KTP DI MANDIUN. REPO INI DI SHARE (MIT LICENSE) HANYA UNTUK PENGGUNA GITHUB DARI LUAR INDONESIA.
 Unless covered under some other license, all content in this repository is shared under an MIT license. See [license.md](./license.md) for details.<br/>
 Madiuntoday and the madiuntoday logo are site (mark or brand, whatevs) of madiuntoday.id under Dinas Komunikasi dan Informatika Kota Madiun and they have all the copyrights and trademarks and whatevs.
 []()
