@@ -82,6 +82,11 @@ public static java.lang.String TABLENAME;
 -keep class com.google.android.gms.ads.identifier.AdvertisingIdClient$Info{
      public *;
 }
+-keepattributes *Annotation*
+-keepclassmembers class ** {
+    @org.greenrobot.eventbus.Subscribe <methods>;
+}
+-keep enum org.greenrobot.eventbus.ThreadMode { *; }
 # skip the Picasso library classes
 -keep class com.squareup.picasso.** {*;}
 -dontwarn com.squareup.picasso.**
