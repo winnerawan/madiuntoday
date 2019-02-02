@@ -27,8 +27,8 @@ android {
         applicationId "net.winnerawan.madiun"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary true
         multiDexEnabled true
@@ -43,14 +43,16 @@ android {
     buildTypes {
         debug {
             buildConfigField("String", "BASE_URL", "\"http://madiuntoday.id\"")
+            manifestPlaceholders = [mapsKey: "AIzaSyDpfft3cPtWGBjkur0eP164mk4A7L_optE"]
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", "\"http://madiuntoday.id\"")
-            //shrinkResources true
-            //zipAlignEnabled true
-            //pseudoLocalesEnabled true
+            manifestPlaceholders = [mapsKey: "AIzaSyDpfft3cPtWGBjkur0eP164mk4A7L_optE"]
+            shrinkResources true
+            zipAlignEnabled true
+            pseudoLocalesEnabled true
         }
     }
 
@@ -136,15 +138,13 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:$rootProject.espressoVersion"
     androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoVersion"
     androidTestAnnotationProcessor "com.google.dagger:dagger-compiler:$rootProject.dagger2Version"
-    implementation 'me.relex:circleindicator:1.2.2'
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.facebook.shimmer:shimmer:0.3.0'
     implementation 'com.google.firebase:firebase-messaging:17.3.4'
-    implementation 'com.google.firebase:firebase-ads:17.1.2'
-    implementation 'com.google.firebase:firebase-core:16.0.6'
-    implementation 'com.applovin:applovin-sdk:8.1.4'
+    implementation 'com.google.firebase:firebase-ads:17.1.3'
+    implementation 'com.google.firebase:firebase-core:16.0.7'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.6'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.8'
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.codesgood:justifiedtextview:1.1.0'
@@ -157,4 +157,15 @@ configurations.all {
     resolutionStrategy.force "com.android.support:support-annotations:$supportLibraryVersion"
 }
 apply plugin: 'com.google.gms.google-services'
-com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true
+configurations.all {
+    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        def requested = details.requested
+        if (requested.group == "com.android.support") {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion "28.+"
+            }
+        }
+    }
+}
+
+//com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

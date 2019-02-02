@@ -16,4 +16,6 @@ public interface CategoryView extends MvpView {
     void postTabEvent();
 
     void displayCategoriesOther(List<Category> categories);
+
+    String getCategoryTitleName();
 }

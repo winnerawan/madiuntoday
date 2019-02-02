@@ -27,10 +27,8 @@ import net.winnerawan.madiun.data.network.model.Category;
 import net.winnerawan.madiun.data.network.model.Post;
 import net.winnerawan.madiun.di.component.ActivityComponent;
 import net.winnerawan.madiun.ui.adapter.NewsAdapter;
-import net.winnerawan.madiun.ui.adapter.PostAdapter;
 import net.winnerawan.madiun.ui.base.BaseFragment;
 import net.winnerawan.madiun.ui.detail.DetailActivity;
-import net.winnerawan.madiun.ui.webview.WebviewActivity;
 import net.winnerawan.madiun.utils.AppConstants;
 import net.winnerawan.madiun.utils.AppLogger;
 
@@ -193,8 +191,10 @@ public class ContentNewsFragment extends BaseFragment implements ContentNewsView
 
     @Override
     public void stopShimmer() {
-        mShimmer.stopShimmer();
-        mShimmer.setVisibility(View.GONE);
+        if (mShimmer!=null) {
+            mShimmer.stopShimmer();
+            mShimmer.setVisibility(View.GONE);
+        }
     }
 
     private void loadMore(int page) {

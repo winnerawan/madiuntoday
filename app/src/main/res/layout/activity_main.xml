@@ -46,6 +46,7 @@
                 android:layout_width="match_parent"
                 app:layout_anchorGravity="bottom"
                 app:menu="@menu/nav"
+                app:labelVisibilityMode="labeled"
                 android:layout_height="wrap_content">
 
         </android.support.design.widget.BottomNavigationView>

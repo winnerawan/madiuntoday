@@ -16,7 +16,6 @@ import net.winnerawan.madiun.di.PerActivity;
 import net.winnerawan.madiun.di.module.ActivityModule;
 import net.winnerawan.madiun.ui.stream.StreamActivity;
 import net.winnerawan.madiun.ui.tv.TvFragment;
-import net.winnerawan.madiun.ui.webview.WebviewActivity;
 
 /**
  * Copyright 2017 Winnerawan T
@@ -40,8 +39,6 @@ public interface ActivityComponent {
     void inject(TvFragment tvFragment);
 
     void inject(ContentNewsFragment contentNewsFragment);
-
-    void inject(WebviewActivity webviewActivity);
 
     void inject(DBHCHTFragment dbhchtFragment);
 

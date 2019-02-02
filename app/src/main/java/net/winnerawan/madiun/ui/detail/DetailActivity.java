@@ -20,18 +20,18 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.rd.PageIndicatorView;
 import net.winnerawan.madiun.BuildConfig;
 import net.winnerawan.madiun.R;
-import net.winnerawan.madiun.data.network.model.Article;
-import net.winnerawan.madiun.data.network.model.Category;
-import net.winnerawan.madiun.data.network.model.Image;
-import net.winnerawan.madiun.data.network.model.Post;
+import net.winnerawan.madiun.data.network.model.*;
 import net.winnerawan.madiun.ui.adapter.HeadLineAdapter;
 import net.winnerawan.madiun.ui.base.BaseActivity;
 import com.google.android.gms.ads.*;
 import net.winnerawan.madiun.ui.gallery.GalleryPagerAdapter;
+import net.winnerawan.madiun.ui.main.MainActivity;
+import net.winnerawan.madiun.utils.AppLogger;
 import net.winnerawan.madiun.utils.CommonUtils;
 import org.sufficientlysecure.htmltextview.HtmlTextView;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DetailActivity extends BaseActivity implements DetailView, HeadLineAdapter.Callback {
@@ -101,7 +101,11 @@ public class DetailActivity extends BaseActivity implements DetailView, HeadLine
                 showBannerAds(isAdsEnable);
             } else {
                 //todo from deeplink
-
+                Uri data = getIntent().getData();
+                if (data==null) {
+                    return;
+                }
+                setUpFromDeeplink(data);
             }
         }
     }
@@ -204,8 +208,10 @@ public class DetailActivity extends BaseActivity implements DetailView, HeadLine
 
     @Override
     public void stopShimmer() {
-        mShimmer.stopShimmer();
-        mShimmer.setVisibility(View.GONE);
+        if (mShimmer!=null) {
+            mShimmer.stopShimmer();
+            mShimmer.setVisibility(View.GONE);
+        }
     }
 
     private void setUpArticle(Article article) {
@@ -232,5 +238,40 @@ public class DetailActivity extends BaseActivity implements DetailView, HeadLine
             mAds.addView(adView);
             adView.loadAd(adRequest);
         }
+    }
+
+    private void setUpFromDeeplink(Uri data) {
+        if (data.toString().equals(BuildConfig.BASE_URL) || data.toString().equals(BuildConfig.BASE_URL+"/")) {
+            finish();
+            startActivity(new Intent(this, MainActivity.class));
+            return;
+        }
+        String scheme = data.getScheme();
+        String host = data.getHost();
+
+        String paths = data.getPath();
+        if (paths!=null) {
+            String[] dates = data.getPath().split("/");
+            post = new Post();
+
+            String date = dates[1] + "-" + dates[2] + "-" + dates[3];
+            date = date + "T00:00:00";
+
+            if (data.getLastPathSegment()!=null) {
+                String title = data.getLastPathSegment().replaceAll("-", " ").toUpperCase();
+                Title judul = new Title();
+                judul.setRendered(title);
+                post.setTitle(judul);
+            }
+            String link = scheme + "://"+host+"/"+data.getPath();
+            List<Integer> cat = new ArrayList<>();
+            cat.add(1);
+            post.setCategories(cat);
+            post.setDate(date);
+            post.setLink(link);
+
+            setUpPost(post);
+        }
+
     }
 }

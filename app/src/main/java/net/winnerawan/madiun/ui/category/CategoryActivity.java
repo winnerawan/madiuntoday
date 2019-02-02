@@ -93,15 +93,15 @@ public class CategoryActivity extends BaseActivity implements CategoryView, Cate
         mItemTouchHelper.attachToRecyclerView(categoryRv);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_category, menu);
-        menuEdit = menu.findItem(R.id.menu_edit);
-        menuCompleted = menu.findItem(R.id.menu_completed);
-        menuEdit.setEnabled(true);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_category, menu);
+//        menuEdit = menu.findItem(R.id.menu_edit);
+//        menuCompleted = menu.findItem(R.id.menu_completed);
+//        menuEdit.setEnabled(true);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -189,5 +189,10 @@ public class CategoryActivity extends BaseActivity implements CategoryView, Cate
     @Override
     public void postTabEvent() {
         EventBus.getDefault().post(new TabEvents());
+    }
+
+    @Override
+    public String getCategoryTitleName() {
+        return getString(R.string.categories);
     }
 }

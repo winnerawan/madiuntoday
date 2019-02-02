@@ -33,6 +33,7 @@ import net.winnerawan.madiun.ui.category.CategoryActivity;
 import net.winnerawan.madiun.ui.content_news.ContentNewsFragment;
 import net.winnerawan.madiun.ui.helper.SlidingTabLayout;
 import net.winnerawan.madiun.utils.AppConstants;
+import net.winnerawan.madiun.utils.AppLogger;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -106,8 +107,10 @@ public class NewsFragment extends BaseFragment implements NewsView {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == AppConstants.INTENT_CATEGORY) {
+            AppLogger.e("ON ACTIVITY RESULT");
             if (resultCode == Activity.RESULT_OK) {
                 if (data == null) {
+                    AppLogger.e("ON ACTIVITY RESULT DATA NULL");
                     return;
                 }
 
@@ -222,7 +225,12 @@ public class NewsFragment extends BaseFragment implements NewsView {
 //        presenter.refreshTabs();
     }
 
-//    @Override
+    @Override
+    public String getCategoryTitleName() {
+        return getString(R.string.categories);
+    }
+
+    //    @Override
 //    public void showHeadLines(List<Post> headlines) {
 //        mRecyclerHeadLines.setLayoutManager(new LinearLayoutManager(getBaseActivity(), LinearLayoutManager.HORIZONTAL, false));
 //        headLineAdapter.addItems(headlines);

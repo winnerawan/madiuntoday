@@ -1,7 +1,6 @@
 package net.winnerawan.madiun.di.module;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
@@ -47,9 +46,6 @@ import net.winnerawan.madiun.ui.tv.TvMvpPresenter;
 import net.winnerawan.madiun.ui.tv.TvPresenter;
 import net.winnerawan.madiun.ui.tv.TvView;
 import net.winnerawan.madiun.ui.tv.VideosAdapter;
-import net.winnerawan.madiun.ui.webview.WebviewMvpPresenter;
-import net.winnerawan.madiun.ui.webview.WebviewPresenter;
-import net.winnerawan.madiun.ui.webview.WebviewView;
 import net.winnerawan.madiun.utils.rx.AppSchedulerProvider;
 import net.winnerawan.madiun.utils.rx.SchedulerProvider;
 
@@ -121,13 +117,6 @@ public class ActivityModule {
     @PerActivity
     DetailMvpPresenter<DetailView> provideDetailPresenter(
             DetailPresenter<DetailView> presenter) {
-        return presenter;
-    }
-
-    @Provides
-    @PerActivity
-    WebviewMvpPresenter<WebviewView> provideWebviewPresenter(
-            WebviewPresenter<WebviewView> presenter) {
         return presenter;
     }
 
@@ -231,14 +220,5 @@ public class ActivityModule {
         return new CategoryAdapter(new ArrayList<>());
     }
 
-//    @Provides
-//    GalleryAdapter provideGalleryAdapter() {
-//        return new GalleryAdapter(new ArrayList<>());
-//    }
-
-//    @Provides
-//    GallerySliderAdapter provideGallerySliderAdapter() {
-//        return new GallerySliderAdapter(new ArrayList<>());
-//    }
 
 }

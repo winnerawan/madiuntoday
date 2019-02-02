@@ -100,7 +100,9 @@ public class TvFragment extends BaseFragment implements TvView, VideosAdapter.Ca
 
     @Override
     public void stopShimmer() {
-        mShimmer.stopShimmer();
-        mShimmer.setVisibility(View.GONE);
+        if (mShimmer!=null) {
+            mShimmer.stopShimmer();
+            mShimmer.setVisibility(View.GONE);
+        }
     }
 }

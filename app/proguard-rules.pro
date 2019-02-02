@@ -4,7 +4,9 @@
 -keep class noman.** { *; }
 -keep class org.joda.** { *; }
 
-
+-keepclassmembers class android.support.design.internal.BottomNavigationMenuView {
+    boolean mShiftingMode;
+}
 -keep class butterknife.** { *; }
 -dontwarn butterknife.internal.**
 -keep class **$$ViewBinder { *; }
@@ -67,7 +69,7 @@ public static java.lang.String TABLENAME;
 -dontwarn org.joda.time.**
 -dontwarn org.shaded.apache.**
 -dontwarn org.ietf.jgss.**
--keep class !net.gokep.app.** { *; }
+-keep class !net.winnerawan.madiun.** { *; }
 -keepattributes SourceFile,LineNumberTable
 -keep class com.inmobi.** { *; }
 -dontwarn com.inmobi.**

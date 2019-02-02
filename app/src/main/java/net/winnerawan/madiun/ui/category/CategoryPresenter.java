@@ -29,14 +29,11 @@ public class CategoryPresenter<V extends CategoryView>
     public void loadCategories() {
         List<Category> categories = getDataManager().getCategoriesFromPref().getCategories();
         int size = categories.size();
-        AppLogger.e("CAT AWAL: "+new Gson().toJson(categories));
-        AppLogger.e("CAT JADI: "+new Gson().toJson(categories));
 
         if (size > 0) {
-            if (!categories.get(0).getName().equalsIgnoreCase("KATEGORI")) {
+            if (!categories.get(0).getName().equalsIgnoreCase(getMvpView().getCategoryTitleName())) {
                 Category category = new Category();
-                category.setId(1);
-                category.setName("KATEGORI");
+                category.setName(getMvpView().getCategoryTitleName());
                 categories.add(0, category);//fixme
                 Log.d("TES_CHANNELQ", "channelq gak sama");
             }
@@ -98,10 +95,9 @@ public class CategoryPresenter<V extends CategoryView>
             list.remove(0);
         }
         getDataManager().clearCategoriesFromPref();
-        if (list.size() > 0 && !list.get(0).getName().equalsIgnoreCase("KATEGORI")) {
+        if (list.size() > 0 && !list.get(0).getName().equalsIgnoreCase(getMvpView().getCategoryTitleName())) {
             Category category = new Category();
-            category.setId(1);
-            category.setName("KATEGORI");
+            category.setName(getMvpView().getCategoryTitleName());
             list.add(0, category); //fixme
         }
         getDataManager().setCategories(new Categories(list));
@@ -120,7 +116,6 @@ public class CategoryPresenter<V extends CategoryView>
         if (size > 0) {
             if (!categories.get(0).getName().equalsIgnoreCase("KATEGORI LAIN")) {
                 Category category = new Category();
-                category.setId(1);
                 category.setName("LAINNYA");
                 categories.add(0, category); //fixme
                 Log.d("TES_CHANNEL", "channel gak sama");

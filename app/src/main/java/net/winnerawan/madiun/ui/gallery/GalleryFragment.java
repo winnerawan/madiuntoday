@@ -109,8 +109,10 @@ public class GalleryFragment extends BaseFragment implements GalleryView {
 
     @Override
     public void stopShimmer() {
-        mShimmer.stopShimmer();
-        mShimmer.setVisibility(View.GONE);
+        if (mShimmer!=null) {
+            mShimmer.stopShimmer();
+            mShimmer.setVisibility(View.GONE);
+        }
     }
 
     private void loadMore(int index) {

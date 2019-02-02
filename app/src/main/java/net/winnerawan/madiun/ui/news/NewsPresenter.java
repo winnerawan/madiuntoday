@@ -3,7 +3,9 @@ package net.winnerawan.madiun.ui.news;
 import com.androidnetworking.error.ANError;
 
 import com.google.gson.Gson;
+import net.winnerawan.madiun.R;
 import net.winnerawan.madiun.data.DataManager;
+import net.winnerawan.madiun.data.network.App;
 import net.winnerawan.madiun.data.network.model.Categories;
 import net.winnerawan.madiun.data.network.model.Category;
 import net.winnerawan.madiun.data.network.model.Post;
@@ -33,9 +35,8 @@ public class NewsPresenter<V extends NewsView> extends BasePresenter<V> implemen
 
         List<Category> categories = getDataManager().getCategoriesFromPref().getCategories();
 
-        if (categories != null) {
-            getMvpView().setTabs(categories);
-            if (categories.get(0).getName().equalsIgnoreCase("KATEGORI")) {
+        if (categories != null && categories.size() > 0 && categories.get(0) != null && !categories.get(0).getName().isEmpty()) {
+            if (categories.get(0).getName().equalsIgnoreCase(getMvpView().getCategoryTitleName())) {
                 categories.remove(0);
             }
             for (int i = 0; i < categories.size(); i++) {
@@ -53,7 +54,16 @@ public class NewsPresenter<V extends NewsView> extends BasePresenter<V> implemen
                 .subscribe(
                         categoriesResponse -> {
                             checkViewAttached();
+                            if (categoriesResponse == null) {
+                                getMvpView().onError(R.string.api_default_error);
+                                return;
+                            }
 
+                            if (categoriesResponse.size() == 0) {
+                                getMvpView().onError(R.string.api_default_error);
+                                return;
+                            }
+                            List<Category> currCategories = categoriesResponse;
                             getDataManager().setCategories(new Categories(categoriesResponse));
 
                             List<Category> categories2 = getDataManager().getCategoriesFromPref().getCategories();
@@ -84,8 +94,8 @@ public class NewsPresenter<V extends NewsView> extends BasePresenter<V> implemen
         getMvpView().showLoading();
         getMvpView().clearTabs();
         List<Category> categories = getDataManager().getCategoriesFromPref().getCategories();
-        if (categories != null) {
-            if (categories.get(0).getName().equalsIgnoreCase("KATEGORI")) {
+        if (categories != null && categories.size() > 0 && categories.get(0) != null && !categories.get(0).getName().isEmpty()) {
+            if (categories.get(0).getName().equalsIgnoreCase(getMvpView().getCategoryTitleName())) {
                 categories.remove(0);
             }
             for (int i = 0; i < categories.size(); i++) {

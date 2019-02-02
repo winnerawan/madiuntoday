@@ -44,6 +44,7 @@
     <string name="choose">Choose One</string>
     <string name="share_by">Share with MADIUN TODAY APP</string>
     <string name="share_by_link">https://play.google.com/store/apps/details?id=net.winnerawan.madiun</string>
-    <string name="categories">CATEGORIES</string>
+    <string name="categories">KATEGORI</string>
+    <string name="error_empty_data">empty</string>
 
 </resources>

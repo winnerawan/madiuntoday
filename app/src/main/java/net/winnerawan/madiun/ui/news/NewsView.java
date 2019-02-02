@@ -20,4 +20,6 @@ public interface NewsView extends MvpView {
     void setTabs(List<Category> categories);
 
     void clearTabs();
+
+    String getCategoryTitleName();
 }
