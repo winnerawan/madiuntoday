@@ -92,6 +92,12 @@ public class DBHCHTFragment extends BaseFragment implements DBHCHTView, SwipeRef
     }
 
     @Override
+    public void onDestroyView() {
+        presenter.onDetach();
+        super.onDestroyView();
+    }
+
+    @Override
     protected void setUp(View view) {
         mInterstitialAd = new InterstitialAd(getBaseActivity());
         mInterstitialAd.setAdUnitId(presenter.getInters());
