@@ -61,6 +61,11 @@ public class TvFragment extends BaseFragment implements TvView, VideosAdapter.Ca
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        presenter.onDetach();
+        super.onDestroyView();
+    }
 
     @Override
     protected void setUp(View view) {
