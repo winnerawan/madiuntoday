@@ -1,3 +1,5 @@
+# [DEPRECATED]
+
 ## MADIUNTODAY ANDROID APP
 
 [<img src="https://cdn.rawgit.com/steverichey/google-play-badge-svg/master/img/id_get.svg" width="20%">](https://play.google.com/store/apps/details?id=net.winnerawan.madiun)
